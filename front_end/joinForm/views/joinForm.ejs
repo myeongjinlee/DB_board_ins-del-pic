@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<meta charset='utf-8'>
+	<!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/plugins.css" />
+  <link rel="stylesheet" href="../assets/css/raleway-webfont.css" />
+  <!--Theme custom css -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!--Theme Responsive css-->
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+	<script src="/javascripts/jquery-3.2.1.min.js"></script>
+	<script>
+	$(function(){
+		$("#btnJoin").click(
+			function(){
+				if($("#id").val() == "")
+				{
+					alert("아이디를 꼭 입력 하세요");
+					$("#id").focus();
+					return ;
+				}
+				if($("#passwd").val() == "")
+				{
+					alert("비밀번호를 꼭 입력 하세요");
+					$("#passwd").focus();
+					return ;
+				}
+				if($("#name").val() == "")
+				{
+					alert("이름을 꼭 입력 하세요");
+					$("#name").focus();
+					return ;
+				}
+				$("#joinForm").submit();
+			}
+			);
+
+  });
+  </script>
+</head>
+
+<body>
+	<h1><%= title %></h1>
+	<form id="joinForm" action="/join" method="post">
+		<table>
+			<tr>
+				<th>아이디</th>
+				<td><input type="text" name="id" id="id" size="12" maxLength="12"></td>
+			</tr>
+      <tr>
+				<th>이름</th>
+				<td><input type="text" name="name" id="name" size="10" maxLength="10"></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="password" name="passwd" id="passwd" size="12" maxLength="12"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" id="btnJoin" name="join" value="가입">
+					<input type="reset" name="cancel"value="취소">
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
