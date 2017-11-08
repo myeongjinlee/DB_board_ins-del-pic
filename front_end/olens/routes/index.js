@@ -1,10 +1,20 @@
 var express = require('express');
 var router = express.Router();
-var mysql_dbc = require('./db_con')();
-var connection = mysql_dbc.init();
-mysql_dbc.test_open(connection);
-
+var session = require('express-session');
+var passport = require('passport');
 var bcrypt = require('bcrypt');
+
+//session 사용
+router.use(session({
+ secret: '@#@$MYSIGN#@$#$',
+ resave: false,
+ saveUninitialized: true
+}));
+
+router.use(passport.initialize()); //passport 시 필수 구문
+router.use(passport.session());   //필 수 구 문. session을 이전에 세팅해놓고 추가
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

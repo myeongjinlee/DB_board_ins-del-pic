@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var api = require('./routes/api');
+var login = require('./routes/login');
+
 var app = express();
 
 // view engine setup
@@ -25,7 +26,8 @@ app.use(express.static(path.join(__dirname, 'node_modules'))); // 노드모듈 �
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/', api);
+app.use('/login', login);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

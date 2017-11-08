@@ -26,13 +26,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/"><img src="assets/images/logo.png" height="30" alt="" /></a>
+                    <a class="navbar-brand" href="#"><img src="assets/images/logo.png" height="30" alt="" /></a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/#Board">Board</a></li>
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#Board">Board</a></li>
                         <li><a href="/login">Login</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -55,34 +55,66 @@
             </div>
         </header>
 
-        <section id="Login" class="sections">
+        <form method="post" action="#">
+          <div class="row"  >
+            <div class="col-md-9 col-md-offset-3 col-sm-6  col-xs-6 col-xs-offset-3" style="margin-left:450dp;align : center; margin-top:50dp;">
+                <input type="text" class="btn btn-default abt-btn" style="width:63%; cursor:text" >
+                <button type="submit" class="btn btn-default abt-btn">SEARCH</button>
+            </div>
+          </div>
+        </form>
+
+        <section id="Board" class="sections">
         <div class="heading-content text-center">
                 <div class="heading-title">
-                    <h3>LOGIN</h3>
-                  <div class="separator"></div>
+                    <h3>Board</h3>
+					        <div class="separator"></div>
                 </div>
                 <div class="heading-separator"></div>
                 <div class="heading-details">
-                    <p>
-                      <form method="post" action="/login" name="frm_login" id="frm_login" >
-                        <div class="row">
-                          <table style="margin-left:560px; margin-right:500px;">
-                            <tr>
-                              <th><strong style="font-size:22px;margin-right:10px; margin-top:10px;">I.D</strong></th>
-                              <td><input type="text" class="btn btn-default abt-btn" name="username" style="cursor:text" ></p></td>
-                            </tr>
-                            <tr>
-                              <th><strong style="font-size:22px;margin-right:10px; margin-top:10px;">Password</strong></th>
-                              <td><input type="password" class="btn btn-default abt-btn" name="password" style="cursor:text" ></p></td>
-                            </tr>
-                          </table>
-                          <button type="submit" class="btn btn-default abt-btn">Login</button>
-                          <button type="button" class="btn btn-default abt-btn"><a href="/joinform">회원 가입</button>
-                        </div>
-                      </form>
-                    </p>
+                    <p> 관심있는 게시물이 보여집니다. </p>
                 </div>
         </div>
+
+        <div id="cd-timeline" class="cd-container">
+            <div class="cd-timeline-block">
+                <div class="cd-timeline-img cd-location">
+                </div> <!-- cd-timeline-img -->
+                <div class="cd-timeline-content">
+					<p>10 January, 2016</p>
+                    <h2>Typi non habent claritatem insitam</h2>
+                    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui</p>
+                    <a href="#0" class="cd-read-more">Read more</a>
+                    <span class="cd-date"><img src="assets/images/timeline/timeline.png" alt="timeline" /></span>
+                </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+            <div class="cd-timeline-block">
+                <div class="cd-timeline-img cd-location">
+                </div> <!-- cd-timeline-img -->
+
+                <div class="cd-timeline-content">
+					<p>10 January, 2016</p>
+                    <h2>Typi non habent claritatem insitam</h2>
+                    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui</p>
+                    <a href="#0" class="cd-read-more">Read more</a>
+                    <span class="cd-date"><img src="assets/images/timeline/timeline.png" alt="timeline" /></span>
+                </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+			<div class="cd-timeline-block">
+                <div class="cd-timeline-img cd-location">
+                </div> <!-- cd-timeline-img -->
+
+                <div class="cd-timeline-content">
+                    <p>10 January, 2016</p>
+                    <h2>Typi non habent claritatem insitam</h2>
+                    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui</p>
+                    <a href="#0" class="cd-read-more">Read more</a>
+                    <span class="cd-date"><img src="assets/images/timeline/timeline.png" alt="timeline" /></span>
+                </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+        </div> <!-- cd-timeline -->
 
         <!--Footer-->
         <footer id="footer" class="sections footer different-bg">
@@ -182,7 +214,5 @@
       <script src="assets/js/plugins.js"></script>
       <script src="assets/js/modernizr.js"></script>
       <script src="assets/js/main.js"></script>
-      <script src="assets/js/jquery.validate.min.js"></script>
-      <script src="routes/login.js"></script>
   </body>
-  </html>
+</html>
