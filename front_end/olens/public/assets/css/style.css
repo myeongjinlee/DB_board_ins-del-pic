@@ -21,7 +21,7 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 /*==========================================
-PRE LOADER 
+PRE LOADER
 ==========================================*/
 .preloader {
     position: fixed;
@@ -316,7 +316,7 @@ Button
     color: #000;
     background-color: #fff;
     border:2px solid #000;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 .btn-default span{
     margin-left:5px;
@@ -891,7 +891,7 @@ input:-ms-input-placeholder {
 }
 
 .cd-timeline-img {
-    
+
     position: absolute;
     /*margin-top: 10px;*/
     top: 0;
@@ -1336,4 +1336,4 @@ input:-ms-input-placeholder {
 .scrollup:hover{
     color:#333;
     transform:scale(1.1);
-}	
+}

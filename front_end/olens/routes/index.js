@@ -1,5 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var mysql_dbc = require('./db_con')();
+var connection = mysql_dbc.init();
+mysql_dbc.test_open(connection);
+
+var bcrypt = require('bcrypt');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
