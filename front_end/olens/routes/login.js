@@ -33,7 +33,7 @@ router.use(session({
    password : 'dlaudwls2!'
  })
 }));
-
+/*
 router.post('/', function(req, res){
   var user = {//현재 유저는 한개만 있음
     userid:'1234',
@@ -50,56 +50,37 @@ router.post('/', function(req, res){
     res.send('who are you?<a href="/login">login</a>');
   }
 });
+*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
 router.post('/', function (req, res, next) {
-  var id = req.body.username;
+  var id = req.body.userid;
   var pw = req.body.password;
-  console.log(pw);
 
   pool.getConnection(function(err,connection){
     connection.query('SELECT * FROM `USERS` WHERE `ID` = ?',id, function (err, result) {
       console.log(result);
       if (result.length === 0){
           console.log('로그인실패');
-        //res.send('<script>alert("해당 유저가 존재하지 않습니다.");location.href="/login";</script>');
+        res.send('<script>alert("해당 유저가 존재하지 않습니다.");location.href="/login";</script>');
         //res.json({success: false});
       }
       else{
-        if (!bcrypt.compareSync(pw, result[0].Password)){
+        if (pw != result[0].Password){
           console.log('로그인비번땡');
-          console.log(result[0].Password);
-          console.log(pw);
-          //res.send('<script>alert("비밀번호가 일치하지 않습니다.");location.href="/login";</script>');
+          res.send('<script>alert("비밀번호가 일치하지 않습니다.");location.href="/login";</script>');
           //res.json({success: false})
         }
         else {
           console.log('로그인성공');
+          res.send('<script>alert("로그인 되었습니다.");location.href="/";</script>');
+          //res.redirect('/');
           //res.json({success: true})
         }
       }
-
     });
   });
 });
-
+/*
 //passport 시 필수 구문
 router.use(passport.initialize());
 router.use(passport.session());
@@ -143,7 +124,9 @@ passport.serializeUser((user, done)=>{//passport.use에서 done으로 준 객체
 passport.deserializeUser((user, done) => { // 매개변수 user는 serializeUser의 done의 인자 user를 받은 것
    done(null, user); // 여기의 user가 req.user가 됨
  });
-
+<<<<<<< HEAD
+*/
+/*
 router.post('/', function (req, res, next) {
   var id = req.body.ID;
   var pw = req.body.Password;
