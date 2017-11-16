@@ -124,5 +124,36 @@ passport.serializeUser((user, done)=>{//passport.use에서 done으로 준 객체
 passport.deserializeUser((user, done) => { // 매개변수 user는 serializeUser의 done의 인자 user를 받은 것
    done(null, user); // 여기의 user가 req.user가 됨
  });
+<<<<<<< HEAD
 */
+/*
+router.post('/', function (req, res, next) {
+  var id = req.body.ID;
+  var pw = req.body.Password;
+
+  pool.getConnection(function(err,connection){
+  connection.query('SELECT * FROM USERS WHERE ID = ?',id, function (err, result) {
+
+    if (err){
+      console.log('err :' + err);
+    }
+    else{
+      if (result.length === 0){
+        res.send('<script>alert("해당 유저가 존재하지 않습니다.");location.href="/login";</script>');
+        res.json({success: false});
+      }
+      else{
+        if (!bcrypt.compareSync(pw, result[0].Password)){
+          res.send('<script>alert("비밀번호가 일치하지 않습니다.");location.href="/login";</script>');
+          res.json({success: false})
+        }
+        else {
+          res.json({success: true})
+        }
+      }
+    }
+    });
+  });
+});*/
+
 module.exports = router;
