@@ -71,6 +71,11 @@ router.get('/', function(req, res, next) {
   })
 });
 
+/* 회원 가입 */
+router.get('/createAccount', function (req, res, next) {
+  res.render('createAccount');
+})
+
 router.get('/login', function (req, res, next) {
   res.render('login');
 });

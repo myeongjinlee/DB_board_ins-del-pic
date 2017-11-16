@@ -8,16 +8,18 @@ var bodyParser = require('body-parser');
 /*=============================================
   the global variable about 'Login module'
   using passport, session                     */
-
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var cookieSession = require('cookie-session');
 var flash = require('connect-flash');
 /*=============================================*/
 
+/*=============================================
+  the routing                                 */
 var index = require('./routes/index');
 var account = require('./routes/account');
-var users = require('./routes/users');
+var apis = require('./routes/apis');
+/*=============================================*/
 
 var app = express();
 
@@ -36,7 +38,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 /*==============================================
 regist the middleware called 'passport'
 about Login module.                          */
-
 app.use(cookieSession({
   name: 'olens'         /* cookie name */,
   keys: ['test_olens']  /* secret key */,
@@ -49,9 +50,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 /*=============================================*/
 
+/*==============================================
+  the routing path                             */
 app.use('/', index);
 app.use('/account', account);
-app.use('/users', users);
+app.use('/apis', apis);
+/*=============================================*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

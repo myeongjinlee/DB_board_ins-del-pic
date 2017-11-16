@@ -3,12 +3,8 @@ var router = express.Router();
 
 /* 마이 페이지 */
 router.get('/', function(req, res, next) {
-  res.send('account/');
+  var user_info = req.session.passport.user;
+  res.render('mypage', { user : user_info });
 });
-
-/* 회원 가입 */
-router.get('/create', function (req, res, next) {
-  res.render('joinForm');
-})
 
 module.exports = router;

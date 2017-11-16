@@ -33,7 +33,13 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/#Board">Board</a></li>
-                        <li><a href="/login">Login</a></li>
+                        <% if(!user) { %>
+                          <li><a href="/login">Login</a></li>
+                        <% } %>
+                        <% if(user) { %>
+                          <li><a href="/account">Mypage</a></li>
+                          <li><a href="/logout">Logout</a></li>
+                        <% } %>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -45,9 +51,9 @@
                     <div class="row">
                         <div class="col-md-12" >
                             <div class="home-content">
-                                <h5>MY BOARD PAGE</h5>
-                                <!-- <h1>The <span>Premium</span> Quality that interesed in <span>MAJOR</span></h1> -->
-                                <h1>나에게 맞는 정보를 찾아 <br><span>좋아요</span>를 클릭하세요</h1>
+                                <h5>MY PAGE</h5>
+                                여기에 내 정보
+                                도연, 게시글 등록 수, 좋아요 받은 수 등이 출력됨.
                             </div>
                         </div>
                     </div>
@@ -55,32 +61,20 @@
             </div>
         </header>
 
-        <section id="Login" class="sections">
         <div class="heading-content text-center">
                 <div class="heading-title">
-                    <h3>LOGIN</h3>
-                  <div class="separator"></div>
+                    <h4>
+                      여기에 탭이 하나 나오고
+                      탭 [좋아요 한 글, 등록한 글]
+                    </h4>
+                    <div class="separator"></div>
+                    좋아요한 게시글, 등록한
+                    <div class="separator"></div>
+                    여기에 카테고리들이 나오고 카테고리 추가/수정하기가 있음
                 </div>
                 <div class="heading-separator"></div>
                 <div class="heading-details">
-                    <p>
-                      <form method="post" action="/login" name="frm_login" id="frm_login" >
-                        <div class="row">
-                          <table style="margin-left:560px; margin-right:500px;">
-                            <tr>
-                              <th><strong style="font-size:22px;margin-right:10px; margin-top:10px;">I.D</strong></th>
-                              <td><input type="text" class="btn btn-default abt-btn" name="username" style="cursor:text" ></p></td>
-                            </tr>
-                            <tr>
-                              <th><strong style="font-size:22px;margin-right:10px; margin-top:10px;">Password</strong></th>
-                              <td><input type="password" class="btn btn-default abt-btn" name="password" style="cursor:text" ></p></td>
-                            </tr>
-                          </table>
-                          <button type="submit" class="btn btn-default abt-btn">Login</button>
-                          <button type="button" class="btn btn-default abt-btn"><a href="/createAccount">회원 가입</button>
-                        </div>
-                      </form>
-                    </p>
+
                 </div>
         </div>
 
