@@ -31,7 +31,7 @@ router.use(session({
 var conn = mysql.createConnection({
 host : 'localhost',
 user : 'root',
-password : 'dlaudwls2!',
+password : '1234',
 database : 'olens',
 });
 
@@ -61,8 +61,8 @@ hasher({Password:req.body.password}, function(err, pass, salt, hash){
       console.log(err);
       res.send('<script>alert("아이디가 존재합니다.");location.href="/joinForm";</script>');
     }else{
-      //res.send('<script>alert("회원가입이 완료되었습니다.");location.href="/";</script>');
-      res.redirect('/joincomplete');
+      res.send('<script>alert("회원가입이 완료되었습니다.");location.href="/";</script>');
+      //res.redirect('/joincomplete');
     }});/*
     users.push(user);//입력한 값을 users배열 맨뒤에 추가함
     req.login(user, function(err){//회원가입이 되고 바로 동시에 로그인 하기 위함

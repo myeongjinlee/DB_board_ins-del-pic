@@ -5,6 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+/*=============================================
+  the global variable about 'Login module'
+  using passport, session                     */
+
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var cookieSession = require('cookie-session');
+var flash = require('connect-flash');
+/*=============================================*/
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
@@ -29,6 +39,22 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/login', login);
 app.use('/join', join);
+
+/*==============================================
+  regist the middleware called 'passport'
+  about Login module.                          */
+
+app.use(cookieSession({
+  name: 'olens'         /* cookie name */,
+  keys: ['test_olens']  /* secret key */,
+  cookie: {             /* expiration time */
+    maxAge: 1000 * 60 * 60 // 1 hour.
+  }
+})) // cookieSession은 request 객체를 통해 session을 다룰수 있게 설정해준다.
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+/*=============================================*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
