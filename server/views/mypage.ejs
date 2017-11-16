@@ -13,6 +13,16 @@
       <link rel="stylesheet" href="assets/css/responsive.css" />
       <!-- button <--></-->
       <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+      <!-- AdminLTE Skins. Choose a skin from the css/skins
+           folder instead of downloading all of them to reduce the load. -->
+      <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
   </head>
   <body>
     <div class='preloader'><div class='loaded'>&nbsp;</div></div>
@@ -62,19 +72,103 @@
         </header>
 
         <div class="heading-content text-center">
-                <div class="heading-title">
-                    <h4>
-                      여기에 탭이 하나 나오고
-                      탭 [좋아요 한 글, 등록한 글]
-                    </h4>
-                    <div class="separator"></div>
-                    좋아요한 게시글, 등록한
-                    <div class="separator"></div>
-                    여기에 카테고리들이 나오고 카테고리 추가/수정하기가 있음
-                </div>
+                <div class="heading-title"></div>
                 <div class="heading-separator"></div>
                 <div class="heading-details">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <!-- Custom Tabs -->
+                      <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a href="#tab_1" data-toggle="tab">좋아요한 글보기</a></li>
+                          <li><a href="#tab_2" data-toggle="tab">등록한 글보기</a></li>
+                          <li><a href="#tab_3" data-toggle="tab">카테고리 보기</a></li>
 
+                          <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                        </ul>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="tab_1">
+                            <% if(!likedPosts.length) { %>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <p>아직 좋아요를 누른 글이 없네요!</p>
+                                  <p>좋아요 하러가기</p><br>
+                                  <a class="btn btn-app">
+                                    <i class="fa fa-heart-o"></i>
+                                    I need your likes
+                                  </a>
+                                </div>
+                              </div>
+                            <% } else { %>
+                              <div class="row">
+                                <% for(var i=0; i<likedPosts.length; i++) { %>
+                                  <div class="col-md-4">
+                                      <p>게시글 번호 <%=likedPosts[i].NO%></p>
+                                      <p>작성자 <%=likedPosts[i].ID%></p>
+                                      <p>제목 <%=likedPosts[i].Title%></p>
+                                      <p>조회수 <%=likedPosts[i].Hit%></p>
+                                  </div>
+                                <% } %>
+                              </div>
+                            <% } %>
+                          </div>
+                          <!-- /.tab-pane -->
+                          <div class="tab-pane" id="tab_2">
+                            <div class="tab-pane active" id="tab_1">
+                              <% if(!writtenPosts.length) { %>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <p>아직 등록한 글이 없네요!</p>
+                                    <p>게시글 등록 하러가기</p><br>
+                                    <a class="btn btn-app">
+                                      <ul class="bs-glyphicons">
+                                        <li>
+                                          <span class="glyphicon glyphicon-plus"></span>
+                                        </li>
+                                      </ul>
+                                      Write your insight.
+                                    </a>
+                                  </div>
+                                </div>
+                              <% } else { %>
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <p>게시글 등록하기</p><br>
+                                    <a class="btn btn-app">
+                                      <ul class="bs-glyphicons">
+                                        <li>
+                                          <span class="glyphicon glyphicon-plus"></span>
+                                        </li>
+                                      </ul>
+
+                                      Write your insight.
+                                    </a>
+
+                                  </div>
+                                  <% for(var i=0; i<writtenPosts.length; i++) { %>
+                                    <div class="col-md-4">
+                                        <p>게시글 번호 <%=writtenPosts[i].NO%></p>
+                                        <p>작성자 <%=writtenPosts[i].ID%></p>
+                                        <p>제목 <%=writtenPosts[i].Title%></p>
+                                        <p>조회수 <%=writtenPosts[i].Hit%></p>
+                                    </div>
+                                  <% } %>
+                                </div>
+                              <% } %>
+                            </div>
+                          </div>
+                          <!-- /.tab-pane -->
+                          <div class="tab-pane" id="tab_3">
+
+                          </div>
+                          <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                      </div>
+                      <!-- nav-tabs-custom -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
                 </div>
         </div>
 
@@ -177,6 +271,16 @@
       <script src="assets/js/modernizr.js"></script>
       <script src="assets/js/main.js"></script>
       <script src="assets/js/jquery.validate.min.js"></script>
-      <script src="routes/login.js"></script>
+
+      <!-- jQuery 3 -->
+      <script src="bower_components/jquery/dist/jquery.min.js"></script>
+      <!-- Bootstrap 3.3.7 -->
+      <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <!-- FastClick -->
+      <script src="bower_components/fastclick/lib/fastclick.js"></script>
+      <!-- AdminLTE App -->
+      <script src="dist/js/adminlte.min.js"></script>
+      <!-- AdminLTE for demo purposes -->
+      <script src="dist/js/demo.js"></script>
   </body>
   </html>
