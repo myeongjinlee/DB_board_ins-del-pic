@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var bodyParser = require('body-parser')
 var session = require('express-session');
 var passport = require('passport');
-var bcrypt = require('bcrypt');
 
 //session 사용
 router.use(session({
@@ -13,7 +13,6 @@ router.use(session({
 
 router.use(passport.initialize()); //passport 시 필수 구문
 router.use(passport.session());   //필 수 구 문. session을 이전에 세팅해놓고 추가
-
 
 
 /* GET home page. */
