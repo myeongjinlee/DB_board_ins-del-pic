@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <table border="1">
+      <% if(boards.length) { %>
+        <tr>
+          <th>글번호</th>
+          <th>작성자</th>
+          <th>제목</th>
+          <th>조회수</th>
+        </tr>
+      <% } %>
+
+      <% for(var i=0; i<boards.length; i++) { %>
+        <tr>
+          <td><%=boards[i].NO%></td>
+          <td><%=boards[i].ID%></td>
+          <td><%=boards[i].Title%></td>
+          <td><%=boards[i].Hit%></td>
+        </tr>
+      <% } %>
+    </table>
+
+  </body>
+</html>

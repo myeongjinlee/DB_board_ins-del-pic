@@ -65,8 +65,7 @@ passport.deserializeUser((user, done) => { // 매개변수 user는 serializeUser
    done(null, user); // 여기의 user가 req.user가 됨
  });
 
-
-router.post('/login', function (req, res, next) {
+router.post('/', function (req, res, next) {
   var id = req.body.ID;
   var pw = req.body.Password;
 
