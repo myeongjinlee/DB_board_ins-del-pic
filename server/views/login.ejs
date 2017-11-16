@@ -33,13 +33,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/#Board">Board</a></li>
-                        <% if(!user) { %>
-                          <li><a href="/login">Login</a></li>
-                        <% } %>
-                        <% if(user) { %>
-                          <li><a href="/account">Mypage</a></li>
-                          <li><a href="/logout">Logout</a></li>
-                        <% } %>
+                        <li><a href="/login">Login</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -52,9 +46,8 @@
                         <div class="col-md-12" >
                             <div class="home-content">
                                 <h5>MY BOARD PAGE</h5>
-
-                                </table>
-
+                                <!-- <h1>The <span>Premium</span> Quality that interesed in <span>MAJOR</span></h1> -->
+                                <h1>나에게 맞는 정보를 찾아 <br><span>좋아요</span>를 클릭하세요</h1>
                             </div>
                         </div>
                     </div>
@@ -65,33 +58,29 @@
         <section id="Login" class="sections">
         <div class="heading-content text-center">
                 <div class="heading-title">
-                    <h4>
-                      <table border="0">
-                        <% if(boards.length) { %>
-                          <tr>
-                            <th>글번호</th>
-                            <th>작성자</th>
-                            <th>제목</th>
-                            <th>조회수</th>
-                          </tr>
-                        <% } %>
-
-                        <% for(var i=0; i<boards.length; i++) { %>
-                          <tr>
-                            <td><%=boards[i].NO%></td>
-                            <td><%=boards[i].ID%></td>
-                            <td><%=boards[i].Title%></td>
-                            <td><%=boards[i].Hit%></td>
-                          </tr>
-
-                        <% } %>
-                      </table>
-                    </h4>
-                    <div class="separator"></div>
+                    <h3>LOGIN</h3>
+                  <div class="separator"></div>
                 </div>
                 <div class="heading-separator"></div>
                 <div class="heading-details">
-
+                    <p>
+                      <form method="post" action="/login" name="frm_login" id="frm_login" >
+                        <div class="row">
+                          <table style="margin-left:560px; margin-right:500px;">
+                            <tr>
+                              <th><strong style="font-size:22px;margin-right:10px; margin-top:10px;">I.D</strong></th>
+                              <td><input type="text" class="btn btn-default abt-btn" name="username" style="cursor:text" ></p></td>
+                            </tr>
+                            <tr>
+                              <th><strong style="font-size:22px;margin-right:10px; margin-top:10px;">Password</strong></th>
+                              <td><input type="password" class="btn btn-default abt-btn" name="password" style="cursor:text" ></p></td>
+                            </tr>
+                          </table>
+                          <button type="submit" class="btn btn-default abt-btn">Login</button>
+                          <button type="button" class="btn btn-default abt-btn"><a href="/account/create">회원 가입</button>
+                        </div>
+                      </form>
+                    </p>
                 </div>
         </div>
 

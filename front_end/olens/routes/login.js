@@ -51,6 +51,11 @@ router.post('/', function(req, res){
   }
 });
 */
+router.get('/', function (req, res, next) {
+  console.log("get login");
+  res.send('eee');
+  // res.render('login', { title : 'Express' });
+})
 
 router.post('/', function (req, res, next) {
   var id = req.body.userid;
@@ -155,5 +160,17 @@ router.post('/', function (req, res, next) {
     });
   });
 });*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
