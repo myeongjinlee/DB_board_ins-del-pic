@@ -42,7 +42,6 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/#Board">Board</a></li>
                         <% if(!user) { %>
                           <li><a href="/login">Login</a></li>
                         <% } %>
@@ -100,13 +99,33 @@
                                 </div>
                               </div>
                             <% } else { %>
+
                               <div class="row">
-                                <% for(var i=0; i<likedPosts.length; i++) { %>
+                                <% for(var i=0; i<likedPosts.length; i++) {
+                                  var date = likedPosts[i].Create_date;
+                                  var formattedDate = (date.getFullYear())+'/'+
+                                                      (date.getMonth()+1)+'/'+
+                                                      (date.getDate());
+                                %>
                                   <div class="col-md-4">
-                                      <p>게시글 번호 <%=likedPosts[i].NO%></p>
-                                      <p>작성자 <%=likedPosts[i].ID%></p>
-                                      <p>제목 <%=likedPosts[i].Title%></p>
-                                      <p>조회수 <%=likedPosts[i].Hit%></p>
+                                    <div class="box">
+                                      <div class="box-header with-border">
+                                        <small><b><%=likedPosts[i].Title%></b></small>
+                                      </div>
+                                      <div class="box-body">
+                                        <small class="pull-right"><%=likedPosts[i].ID%>, <%=formattedDate%></small><br>
+                                        <%=likedPosts[i].Content%>
+                                        <hr>
+                                        <div class="col-md-3">
+                                          이곳에는 사진이 들어갈 것입니다.
+                                        </div>
+                                        <div class="col-md-9">
+                                          <b>이곳에는 타이틀,</b> <br>
+                                          내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
+                                          <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 </small>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
                                 <% } %>
                               </div>
@@ -139,18 +158,44 @@
                                           <span class="glyphicon glyphicon-plus"></span>
                                         </li>
                                       </ul>
-
                                       Write your insight.
                                     </a>
-
                                   </div>
-                                  <% for(var i=0; i<writtenPosts.length; i++) { %>
-                                    <div class="col-md-4">
-                                        <p>게시글 번호 <%=writtenPosts[i].NO%></p>
-                                        <p>작성자 <%=writtenPosts[i].ID%></p>
-                                        <p>제목 <%=writtenPosts[i].Title%></p>
-                                        <p>조회수 <%=writtenPosts[i].Hit%></p>
+
+                                  <% for(var i=0; i<writtenPosts.length; i++) {
+                                    var date = writtenPosts[i].Create_date;
+                                    var formattedDate = (date.getFullYear())+'/'+
+                                                        (date.getMonth()+1)+'/'+
+                                                        (date.getDate());
+                                  %>
+                                  <div class="col-md-4">
+                                    <div class="box">
+                                      <div class="box-header with-border">
+                                        <small><b><%=writtenPosts[i].Title%></b></small>
+                                        <div class="box-tools pull-right">
+                                          <button type="button" name="button1" class="btn btn-box-tool">
+                                            <i class="fa fa-cog"></i>
+                                          </button>
+                                          <button type="button" name="button1" class="btn btn-box-tool">
+                                            <i class="fa fa-times"></i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                      <div class="box-body">
+                                        <small class="pull-right"><%=writtenPosts[i].ID%>, <%=formattedDate%></small><br>
+                                        <%=writtenPosts[i].Content%>
+                                        <hr>
+                                        <div class="col-md-3">
+                                          이곳에는 사진이 들어갈 것입니다.
+                                        </div>
+                                        <div class="col-md-9">
+                                          <b>이곳에는 타이틀,</b> <br>
+                                          내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
+                                          <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 </small>
+                                        </div>
+                                      </div>
                                     </div>
+                                  </div>
                                   <% } %>
                                 </div>
                               <% } %>
