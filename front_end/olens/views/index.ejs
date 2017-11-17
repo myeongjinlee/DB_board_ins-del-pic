@@ -34,9 +34,9 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="#Board">Board</a></li>
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="#" style="display:none">Logout</a></li>
-                        <li><a href="#" style="display:none">MyPage</a></li>
+                        <li><a href="/login" id ="login">Login</a></li>
+                        <li><a href="#" id = "logout" style="display:none">Logout</a></li>
+                        <li><a href="#" id = "mypage" style="display:none">MyPage</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -79,46 +79,44 @@
                 </div>
         </div>
 
-        <div id="cd-timeline" class="cd-container">
+        <%
+          for(var i=0;i<rows.length;i++)
+          {
+            var oneItem = rows[i];
+            var titlecon = title[i];
+            console.log(titlecon);
+        %>
+          <div id="cd-timeline" class="cd-container">
             <div class="cd-timeline-block">
                 <div class="cd-timeline-img cd-location">
                 </div> <!-- cd-timeline-img -->
                 <div class="cd-timeline-content">
-					<p>10 January, 2016</p>
-                    <h2>Typi non habent claritatem insitam</h2>
-                    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui</p>
-                    <a href="#0" class="cd-read-more">Read more</a>
+          <p><%=oneItem.create_date%></p>
+                    <h2><%=title[i]%></h2>
+                    <p><%=oneItem.Content%></p>
+                    <!-- <%=oneItem.URL%> -->
+                    <a href="#" class="cd-read-more">Read more</a>
                     <span class="cd-date"><img src="assets/images/timeline/timeline.png" alt="timeline" /></span>
                 </div> <!-- cd-timeline-content -->
             </div> <!-- cd-timeline-block -->
-
-            <div class="cd-timeline-block">
-                <div class="cd-timeline-img cd-location">
-                </div> <!-- cd-timeline-img -->
-
-                <div class="cd-timeline-content">
-					<p>10 January, 2016</p>
-                    <h2>Typi non habent claritatem insitam</h2>
-                    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui</p>
-                    <a href="#0" class="cd-read-more">Read more</a>
-                    <span class="cd-date"><img src="assets/images/timeline/timeline.png" alt="timeline" /></span>
-                </div> <!-- cd-timeline-content -->
-            </div> <!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-                <div class="cd-timeline-img cd-location">
-                </div> <!-- cd-timeline-img -->
-
-                <div class="cd-timeline-content">
-                    <p>10 January, 2016</p>
-                    <h2>Typi non habent claritatem insitam</h2>
-                    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui</p>
-                    <a href="#0" class="cd-read-more">Read more</a>
-                    <span class="cd-date"><img src="assets/images/timeline/timeline.png" alt="timeline" /></span>
-                </div> <!-- cd-timeline-content -->
-            </div> <!-- cd-timeline-block -->
-        </div> <!-- cd-timeline -->
-
+            <% i++;
+            oneItem = rows[i]; %>
+              <div class="cd-timeline-block">
+                  <div class="cd-timeline-img cd-location">
+                  </div> <!-- cd-timeline-img -->
+                  <div class="cd-timeline-content">
+            <p><%=oneItem.create_date%></p>
+                      <h2><%=title[i]%></h2>
+                      <p><%=oneItem.Content%></p>
+                      <!-- <%=oneItem.URL%> -->
+                      <a href="#" class="cd-read-more">Read more</a>
+                      <span class="cd-date"><img src="assets/images/timeline/timeline.png" alt="timeline" /></span>
+                  </div> <!-- cd-timeline-content -->
+              </div> <!-- cd-timeline-block -->
+            </div>
+        <%
+          }
+        %>
         <!--Footer-->
         <footer id="footer" class="sections footer different-bg">
         <div class="container">
