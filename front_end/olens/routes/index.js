@@ -26,27 +26,18 @@ router.use(passport.session());   //필 수 구 문. session을 이전에 세팅
 var title = new Array();
 
 /* GET home page. */
+
 router.get('/', function(req, res, next) {
   pool.getConnection(function(err,connection){
-    var boardlist = "SELECT ID,Content,URL,Hit,date_format(create_date,'%Y-%m-%d %H:%i:%s')create_date FROM boards order by Hit DESC";
+    var i=0;
+    var boardlist = "SELECT ID,Content,URL,Hit,date_format(create_date,'%Y-%m-%d %H:%i:%s')create_date FROM boards order by Hit DESC LIMIT 4";
     connection.query(boardlist,function(err,rows){
       if(err) {
         console.log("err : " + err);
       }else {
-        for(var i=0;i<rows.length;i++){
-          var url = rows[i].URL;
-          request(url, function(error, response, html){
-              if (error) {throw error};
-              var $ = cheerio.load(html);
-              $('h2').each(function(){
-                if($(this).text().length != 0 )
-                title[i]=$(this).text();
-                //console.log(title[i]);
-              });
-            });
-          }
-          console.log(title);
-          res.render('index', {rows,title});
+          // console.log('111');
+          // console.log(title);
+          res.render('index', {rows});
           connection.release();
         }
     });

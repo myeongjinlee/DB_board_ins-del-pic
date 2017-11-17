@@ -59,9 +59,10 @@ passport.use(new LocalStrategy({
 }));
 
 router.get('/', function(req, res, next) {
+  var user_info = req.session.passport===undefined ?
+    0 : req.session.passport.user;
   //기본 쿼리 문 : 히트순으로 정렬
   var query = 'select * from boards order by hit desc';
-  var user_info = req.session.passport.user;
   connection.query(query, function (err, result) {
     if(err) {
         console.error('query error : ' + err);
