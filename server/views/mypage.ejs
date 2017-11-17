@@ -146,10 +146,12 @@
                                   </div>
                                   <% for(var i=0; i<writtenPosts.length; i++) { %>
                                     <div class="col-md-4">
+                                      <div class="box">
                                         <p>게시글 번호 <%=writtenPosts[i].NO%></p>
                                         <p>작성자 <%=writtenPosts[i].ID%></p>
                                         <p>제목 <%=writtenPosts[i].Title%></p>
                                         <p>조회수 <%=writtenPosts[i].Hit%></p>
+                                      </div>
                                     </div>
                                   <% } %>
                                 </div>
