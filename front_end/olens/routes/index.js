@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser')
 var session = require('express-session');
 var passport = require('passport');
 var mysql = require('mysql');
@@ -56,7 +55,36 @@ router.get('/', function(req, res, next) {
 
 router.get('/login', function (req, res, next) {
   res.render('login', { title : 'Express' });
-})
+});
+
+router.post('/login', function (req, res, next) {
+  var id = req.body.userid;
+  var pw = req.body.password;
+
+  pool.getConnection(function(err,connection){
+    connection.query('SELECT * FROM `USERS` WHERE `ID` = ?',id, function (err, result) {
+      console.log(result);
+      if (result.length === 0){
+          console.log('로그인실패');
+        res.send('<script>alert("해당 유저가 존재하지 않습니다.");location.href="/login";</script>');
+        //res.json({success: false});
+      }
+      else{
+        if (pw != result[0].Password){
+          console.log('로그인비번땡');
+          res.send('<script>alert("비밀번호가 일치하지 않습니다.");location.href="/login";</script>');
+          //res.json({success: false})
+        }
+        else {
+          console.log('로그인성공');
+          res.send('<script>alert("로그인 되었습니다.");location.href="/";</script>');
+          //res.redirect('/');
+          //res.json({success: true})
+        }
+      }
+    });
+  });
+});
 
 router.get('/joinForm', function (req, res, next) {
   res.render('joinForm', { title : 'Express' });

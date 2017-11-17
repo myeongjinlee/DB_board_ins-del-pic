@@ -51,18 +51,14 @@ router.post('/', function(req, res){
   }
 });
 */
-//local 전략이 실행되면 function(username, password, done) 콜백이 실행됨
-/*
-router.post('/',passport.authenticate('local',
-  {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: false }
-)
-);
-*/
-router.post('/',passport.authenticate('local'),function (req, res) {
-  var id = req.body.Username;
+router.get('/', function (req, res, next) {
+  console.log("get login");
+  res.send('eee');
+  // res.render('login', { title : 'Express' });
+})
+
+router.post('/', function (req, res, next) {
+  var id = req.body.userid;
   var pw = req.body.password;
   console.log('처리부분');
   console.log(id);
@@ -144,5 +140,17 @@ passport.deserializeUser(function(id, done) {
     //}
     done(null, id);
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

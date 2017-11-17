@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Olens</title>
+      <!-- css -->
+      <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/assets/css/plugins.css" />
+      <link rel="stylesheet" href="/assets/css/raleway-webfont.css" />
+      <!--Theme custom css -->
+      <link rel="stylesheet" href="/assets/css/style.css">
+      <!--Theme Responsive css-->
+      <link rel="stylesheet" href="/assets/css/responsive.css" />
+      <!-- button <--></-->
+      <script src="/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+      <!-- AdminLTE Skins. Choose a skin from the css/skins
+           folder instead of downloading all of them to reduce the load. -->
+      <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+  </head>
+  <body>
+    <div class='preloader'><div class='loaded'>&nbsp;</div></div>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" height="30" alt="" /></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/#Board">Board</a></li>
+                        <% if(!user) { %>
+                          <li><a href="/login">Login</a></li>
+                        <% } %>
+                        <% if(user) { %>
+                          <li><a href="/account">Mypage</a></li>
+                          <li><a href="/logout">Logout</a></li>
+                        <% } %>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <!--Home page style-->
+        <header id="home" class="home">
+            <div class="overlay-img">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12" >
+                            <div class="home-content">
+                                <h5>MY PAGE</h5>
+                                여기에 내 정보
+                                도연, 게시글 등록 수, 좋아요 받은 수 등이 출력됨.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="heading-content text-center">
+                <div class="heading-title"></div>
+                <div class="heading-separator"></div>
+                <div class="heading-details">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <!-- Custom Tabs -->
+                      <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a href="#tab_1" data-toggle="tab">좋아요한 글보기</a></li>
+                          <li><a href="#tab_2" data-toggle="tab">등록한 글보기</a></li>
+                          <li><a href="#tab_3" data-toggle="tab">카테고리 보기</a></li>
+
+                          <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                        </ul>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="tab_1">
+                            <% if(!likedPosts.length) { %>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <p>아직 좋아요를 누른 글이 없네요!</p>
+                                  <p>좋아요 하러가기</p><br>
+                                  <a class="btn btn-app" href="/">
+                                    <i class="fa fa-heart-o"></i>
+                                    I need your likes
+                                  </a>
+                                </div>
+                              </div>
+                            <% } else { %>
+                              <div class="row">
+                                <% for(var i=0; i<likedPosts.length; i++) { %>
+                                  <div class="col-md-4">
+                                      <p>게시글 번호 <%=likedPosts[i].NO%></p>
+                                      <p>작성자 <%=likedPosts[i].ID%></p>
+                                      <p>제목 <%=likedPosts[i].Title%></p>
+                                      <p>조회수 <%=likedPosts[i].Hit%></p>
+                                  </div>
+                                <% } %>
+                              </div>
+                            <% } %>
+                          </div>
+                          <!-- /.tab-pane -->
+                          <div class="tab-pane" id="tab_2">
+                              <% if(!writtenPosts.length) { %>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <p>아직 등록한 글이 없네요!</p>
+                                    <p>게시글 등록 하러가기</p><br>
+                                    <a class="btn btn-app" href="/account/writePost">
+                                      <ul class="bs-glyphicons">
+                                        <li>
+                                          <span class="glyphicon glyphicon-plus"></span>
+                                        </li>
+                                      </ul>
+                                      Write your insight.
+                                    </a>
+                                  </div>
+                                </div>
+                              <% } else { %>
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <p>게시글 등록하기</p><br>
+                                    <a class="btn btn-app" href="/account/writePost">
+                                      <ul class="bs-glyphicons">
+                                        <li>
+                                          <span class="glyphicon glyphicon-plus"></span>
+                                        </li>
+                                      </ul>
+
+                                      Write your insight.
+                                    </a>
+
+                                  </div>
+                                  <% for(var i=0; i<writtenPosts.length; i++) { %>
+                                    <div class="col-md-4">
+                                        <p>게시글 번호 <%=writtenPosts[i].NO%></p>
+                                        <p>작성자 <%=writtenPosts[i].ID%></p>
+                                        <p>제목 <%=writtenPosts[i].Title%></p>
+                                        <p>조회수 <%=writtenPosts[i].Hit%></p>
+                                    </div>
+                                  <% } %>
+                                </div>
+                              <% } %>
+                          </div>
+                          <!-- /.tab-pane -->
+                          <div class="tab-pane" id="tab_3">
+
+                          </div>
+                          <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                      </div>
+                      <!-- nav-tabs-custom -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                </div>
+        </div>
+
+        <!--Footer-->
+        <footer id="footer" class="sections footer different-bg">
+        <div class="container">
+          <div class="row">
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="footer-first-content">
+                      <div class="logo"><img src="/assets/images/footer-logo.png" alt="Company Logo" /></div>
+                      <p>개발자들이 연구 및 개발을 진행하면서 수 많은 문서 및 소스 코드 등을 참고하고, 환경 설정 및 트러블 슈팅이 잘 된 게시글들을 참조하곤 한다. </p>
+                      <p>시간이 오래 지난 후 방대한 양의 data에서 이전에 참조하였던 블로그나 문서들을 다시 찾는 시간이 오래 걸린다는 문제를 해결하고자 해당 작업을 진행할 때 참조하거나 고민했었던
+                        이슈 들을 기록하고 공유함으로써 여러 사람에게 생산성을 높이고자 해당 웹 애플리케이션을 개발하게 되었다</p>
+                  </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="footer-mid-content">
+                      <h4>Recent Posts</h4>
+                      <div class="post">
+            <div class="post-item">
+              <h6>March 30, 2014</h6>
+              <a href="#">Duis autem vel eum iriure dolor</a>
+            </div>
+                      </div>
+                      <div class="post">
+            <div class="post-item">
+              <h6>March 30, 2014</h6>
+              <a href="#">Duis autem vel eum iriure dolor</a>
+            </div>
+                      </div>
+                      <div class="post">
+            <div class="post-item">
+              <h6>March 30, 2014</h6>
+              <a href="#">Duis autem vel eum iriure dolor</a>
+            </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="footer-mid-content">
+                      <h4>Twitter Feeds</h4>
+                      <div class="post">
+            <div class="post-item">
+              <h6>March 30, 2014</h6>
+              <a href="#">Good work buddy</a>
+            </div>
+                      </div>
+                      <div class="post">
+            <div class="post-item">
+              <h6>March 30, 2014</h6>
+              <a href="#">Good work buddy</a>
+            </div>
+                      </div>
+                      <div class="post">
+            <div class="post-item">
+              <h6>March 30, 2014</h6>
+              <a href="#">Good work buddy</a>
+            </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="footer-last-content">
+                      <h4>Our Address</h4>
+                      <p>광운대학교 컴퓨터공학과 </p>
+                      <p>이명진</p>
+                      <div class="contact-info">
+                          <p><i class="fa fa-map-marker"></i>Moonshine St. 14/05 Light</p>
+                          <p><i class="fa fa-phone"></i>+00 (123) 456 78 90</p>
+                          <p><i class="fa fa-envelope"></i>first.last@email.com</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </div>
+        </footer>
+
+      <div class="scroll-top">
+        <div class="scrollup">
+        <i class="fa fa-angle-double-up"></i>
+        </div>
+      </div>
+
+      <footer class="copyright-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="copyright text-center">
+                <p>Made with <i class="fa fa-heart"></i> by <a target="_blank" href="http://bootstrapthemes.co"> Bootstrap Themes </a>2016. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <script src="/assets/js/vendor/jquery-1.11.2.min.js"></script>
+      <script src="/assets/js/vendor/bootstrap.min.js"></script>
+      <script src="/assets/js/jquery.easypiechart.min.js"></script>
+      <script src="/assets/js/plugins.js"></script>
+      <script src="/assets/js/modernizr.js"></script>
+      <script src="/assets/js/main.js"></script>
+      <script src="/assets/js/jquery.validate.min.js"></script>
+
+      <!-- jQuery 3 -->
+      <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+      <!-- Bootstrap 3.3.7 -->
+      <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <!-- FastClick -->
+      <script src="/bower_components/fastclick/lib/fastclick.js"></script>
+      <!-- AdminLTE App -->
+      <script src="/dist/js/adminlte.min.js"></script>
+      <!-- AdminLTE for demo purposes -->
+      <script src="/dist/js/demo.js"></script>
+  </body>
+  </html>
