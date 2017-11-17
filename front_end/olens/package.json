@@ -9,6 +9,7 @@
     "bcrypt": "^1.0.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.18.2",
+    "cheerio": "^1.0.0-rc.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "cookie-session": "^2.0.0-beta.3",
@@ -23,6 +24,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pbkdf2-password": "^1.2.1",
+    "request": "^2.83.0",
     "serve-favicon": "~2.4.5",
     "session-file-store": "^1.1.2"
   }

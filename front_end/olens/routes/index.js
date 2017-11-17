@@ -1,38 +1,56 @@
 var express = require('express');
 var router = express.Router();
 var session = require('express-session');
-var passport = require('passport')//passport-인증방법(ex, facebook, twitter etc..)
-var LocalStrategy = require('passport-local').Strategy //로컬 방식의 passport이용
+var passport = require('passport');
 var mysql = require('mysql');
-var bkfd2Password = require('pbkdf2-password')//비밀번호 암호화 npm
-var hasher = bkfd2Password();
-var bodyParser = require('body-parser');
-var MySQLStore = require('express-mysql-session')(session);
-// 
-// //session 사용
-// router.use(session({
-//  secret: '@#@$MYSIGN#@$#$',
-//  resave: false,
-//  saveUninitialized: true,
-//  store: new MySQLStore({
-//    host : 'localhost',
-//    user : 'root',
-//    database : 'olens',
-//    password : '1234'
-//  })
-// }));
-//
-// var pool = mysql.createPool({
-//   connectionLimit : 5,
-//   host : 'localhost',
-//   user : 'root',
-//   database : 'olens',
-//   password : '1234'
-// });
+var cheerio = require('cheerio');
+var request = require('request');
+
+var pool = mysql.createPool({
+  connectionLimit : 5,
+  host : 'localhost',
+  user : 'root',
+  database : 'olens',
+  password : 'dlaudwls2!'
+});
+
+//session 사용
+router.use(session({
+ secret: '@#@$MYSIGN#@$#$',
+ resave: false,
+ saveUninitialized: true
+}));
+
+router.use(passport.initialize()); //passport 시 필수 구문
+router.use(passport.session());   //필 수 구 문. session을 이전에 세팅해놓고 추가
+var title = new Array();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  pool.getConnection(function(err,connection){
+    var boardlist = "SELECT ID,Content,URL,Hit,date_format(create_date,'%Y-%m-%d %H:%i:%s')create_date FROM boards order by Hit DESC";
+    connection.query(boardlist,function(err,rows){
+      if(err) {
+        console.log("err : " + err);
+      }else {
+        for(var i=0;i<rows.length;i++){
+          var url = rows[i].URL;
+          request(url, function(error, response, html){
+              if (error) {throw error};
+              var $ = cheerio.load(html);
+              $('h2').each(function(){
+                if($(this).text().length != 0 )
+                title[i]=$(this).text();
+                //console.log(title[i]);
+              });
+            });
+          }
+          console.log(title);
+          res.render('index', {rows,title});
+          connection.release();
+        }
+    });
+  });
 });
 
 router.get('/login', function (req, res, next) {
