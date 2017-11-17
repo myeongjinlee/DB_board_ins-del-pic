@@ -59,115 +59,56 @@
             <div class="overlay-img">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12" >
-                            <div class="home-content">
-                                <h5>MY PAGE</h5>
-                                여기에 내 정보
-                                도연, 게시글 등록 수, 좋아요 받은 수 등이 출력됨.
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </header>
 
+        <section id="Login" class="sections">
         <div class="heading-content text-center">
-                <div class="heading-title"></div>
-                <div class="heading-separator"></div>
-                <div class="heading-details">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <!-- Custom Tabs -->
-                      <div class="nav-tabs-custom">
-                        <ul class="nav nav-tabs">
-                          <li class="active"><a href="#tab_1" data-toggle="tab">좋아요한 글보기</a></li>
-                          <li><a href="#tab_2" data-toggle="tab">등록한 글보기</a></li>
-                          <li><a href="#tab_3" data-toggle="tab">카테고리 보기</a></li>
+          <div class="heading-title">
 
-                          <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
-                        </ul>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="tab_1">
-                            <% if(!likedPosts.length) { %>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <p>아직 좋아요를 누른 글이 없네요!</p>
-                                  <p>좋아요 하러가기</p><br>
-                                  <a class="btn btn-app" href="/">
-                                    <i class="fa fa-heart-o"></i>
-                                    I need your likes
-                                  </a>
-                                </div>
-                              </div>
-                            <% } else { %>
-                              <div class="row">
-                                <% for(var i=0; i<likedPosts.length; i++) { %>
-                                  <div class="col-md-4">
-                                      <p>게시글 번호 <%=likedPosts[i].NO%></p>
-                                      <p>작성자 <%=likedPosts[i].ID%></p>
-                                      <p>제목 <%=likedPosts[i].Title%></p>
-                                      <p>조회수 <%=likedPosts[i].Hit%></p>
-                                  </div>
-                                <% } %>
-                              </div>
-                            <% } %>
-                          </div>
-                          <!-- /.tab-pane -->
-                          <div class="tab-pane" id="tab_2">
-                              <% if(!writtenPosts.length) { %>
-                                <div class="row">
-                                  <div class="col-md-12">
-                                    <p>아직 등록한 글이 없네요!</p>
-                                    <p>게시글 등록 하러가기</p><br>
-                                    <a class="btn btn-app" href="/account/writePost">
-                                      <ul class="bs-glyphicons">
-                                        <li>
-                                          <span class="glyphicon glyphicon-plus"></span>
-                                        </li>
-                                      </ul>
-                                      Write your insight.
-                                    </a>
-                                  </div>
-                                </div>
-                              <% } else { %>
-                                <div class="row">
-                                  <div class="col-md-4">
-                                    <p>게시글 등록하기</p><br>
-                                    <a class="btn btn-app" href="/account/writePost">
-                                      <ul class="bs-glyphicons">
-                                        <li>
-                                          <span class="glyphicon glyphicon-plus"></span>
-                                        </li>
-                                      </ul>
-
-                                      Write your insight.
-                                    </a>
-
-                                  </div>
-                                  <% for(var i=0; i<writtenPosts.length; i++) { %>
-                                    <div class="col-md-4">
-                                        <p>게시글 번호 <%=writtenPosts[i].NO%></p>
-                                        <p>작성자 <%=writtenPosts[i].ID%></p>
-                                        <p>제목 <%=writtenPosts[i].Title%></p>
-                                        <p>조회수 <%=writtenPosts[i].Hit%></p>
-                                    </div>
-                                  <% } %>
-                                </div>
-                              <% } %>
-                          </div>
-                          <!-- /.tab-pane -->
-                          <div class="tab-pane" id="tab_3">
-
-                          </div>
-                          <!-- /.tab-pane -->
-                        </div>
-                        <!-- /.tab-content -->
-                      </div>
-                      <!-- nav-tabs-custom -->
-                    </div>
-                    <!-- /.col -->
+              <!-- <div class="separator"></div> -->
+          </div>
+          <div class="heading-separator"></div>
+          <div class="heading-details">
+            <div class="row">
+              <br>
+              <div class="col-md-4 col-md-offset-4">
+                <div class="box">
+                  <div class="box-header with-border">
+                    <h3>게시글 등록</h3>
                   </div>
+                  <!-- /.box-header -->
+                  <!-- form start -->
+                  <form action="/apis/writePost" method="post" class="form-horizontal">
+                    <div class="box-body">
+                      <div class="form-group">
+                        <label for="Title" class="col-sm-2 control-label">Title</label>
+
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="Title" name="Title" placeholder="Title">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="URL" class="col-sm-2 control-label">URL</label>
+
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="URL" name="URL" placeholder="URL">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                      <button type="submit" class="btn btn-default pull-right">등록</button>
+                    </div>
+                    <!-- /.box-footer -->
+                  </form>
                 </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!--Footer-->

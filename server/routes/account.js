@@ -9,7 +9,7 @@ var connection = mysql_dbc.init();
 router.get('/', function(req, res, next) {
   var user_info = req.session.passport.user;
 
-  var first_query = 'select * from boards where ID = ? order by hit desc'; // 좋아요에 대한 쿼리문으로 변경하여야함!
+  var first_query = 'select * from boards where NO in (select NO from is_like where ID= ?)';
   connection.query(first_query, user_info.user_id, function (err, first_results) {
     if(err) {
       console.error('query error : ' + err);
@@ -23,11 +23,18 @@ router.get('/', function(req, res, next) {
             user : user_info,
             likedPosts : first_results,
             writtenPosts : second_results,
-            categories : {}
+            categories : {} /* should feel */
           });
         }
       })
-    }})
+    }
+  })
+});
+
+/* 게시글 등록 */
+router.get('/writePost', function (req, res, next) {
+  var user_info = req.session.passport.user;
+  res.render('writePost', { user : user_info });
 });
 
 module.exports = router;
