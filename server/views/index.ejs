@@ -13,6 +13,17 @@
       <link rel="stylesheet" href="assets/css/responsive.css" />
       <!-- button <--></-->
       <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+      <!-- AdminLTE Skins. Choose a skin from the css/skins
+           folder instead of downloading all of them to reduce the load. -->
+      <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+
   </head>
   <body>
     <div class='preloader'><div class='loaded'>&nbsp;</div></div>
@@ -32,7 +43,6 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/#Board">Board</a></li>
                         <% if(!user) { %>
                           <li><a href="/login">Login</a></li>
                         <% } %>
@@ -65,33 +75,40 @@
         <section id="Login" class="sections">
         <div class="heading-content text-center">
                 <div class="heading-title">
-                    <h4>
-                      <table border="0">
-                        <% if(boards.length) { %>
-                          <tr>
-                            <th>글번호</th>
-                            <th>작성자</th>
-                            <th>제목</th>
-                            <th>조회수</th>
-                          </tr>
-                        <% } %>
-
-                        <% for(var i=0; i<boards.length; i++) { %>
-                          <tr>
-                            <td><%=boards[i].NO%></td>
-                            <td><%=boards[i].ID%></td>
-                            <td><%=boards[i].Title%></td>
-                            <td><%=boards[i].Hit%></td>
-                          </tr>
-
-                        <% } %>
-                      </table>
-                    </h4>
-                    <div class="separator"></div>
+                    <!-- <div class="separator"></div> -->
                 </div>
-                <div class="heading-separator"></div>
+                <!-- <div class="heading-separator"></div> -->
                 <div class="heading-details">
-
+                  <div class="row">
+                    <% for(var i=0; i<boards.length; i++) {
+                      var date = boards[i].Create_date;
+                      var formattedDate = (date.getFullYear())+'/'+
+                                          (date.getMonth()+1)+'/'+
+                                          (date.getDate());
+                    %>
+                      <div class="col-md-6">
+                        <div class="box">
+                          <div class="box-header with-border">
+                            <small><b><%=boards[i].Title%></b></small>
+                          </div>
+                          <div class="box-body">
+                            <small class="pull-right"><%=boards[i].ID%>, <%=formattedDate%></small><br>
+                            이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다. 이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.
+                            이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.
+                            이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.<hr>
+                            <div class="col-md-3">
+                              이곳에는 사진이 들어갈 것입니다.
+                            </div>
+                            <div class="col-md-9">
+                              <b>이곳에는 타이틀,</b> <br>
+                              내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
+                              <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 | #해쉬태그3 </small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <% } %>
+                  </div>
                 </div>
         </div>
 
@@ -194,5 +211,15 @@
       <script src="assets/js/modernizr.js"></script>
       <script src="assets/js/main.js"></script>
       <script src="assets/js/jquery.validate.min.js"></script>
+      <!-- jQuery 3 -->
+      <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+      <!-- Bootstrap 3.3.7 -->
+      <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <!-- FastClick -->
+      <script src="/bower_components/fastclick/lib/fastclick.js"></script>
+      <!-- AdminLTE App -->
+      <script src="/dist/js/adminlte.min.js"></script>
+      <!-- AdminLTE for demo purposes -->
+      <script src="/dist/js/demo.js"></script>
   </body>
   </html>
