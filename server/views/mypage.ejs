@@ -114,9 +114,8 @@
                                       </div>
                                       <div class="box-body">
                                         <small class="pull-right"><%=likedPosts[i].ID%>, <%=formattedDate%></small><br>
-                                        이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다. 이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.
-                                        이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.
-                                        이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.<hr>
+                                        <%=likedPosts[i].Content%>
+                                        <hr>
                                         <div class="col-md-3">
                                           이곳에는 사진이 들어갈 것입니다.
                                         </div>
@@ -162,6 +161,7 @@
                                       Write your insight.
                                     </a>
                                   </div>
+
                                   <% for(var i=0; i<writtenPosts.length; i++) {
                                     var date = writtenPosts[i].Create_date;
                                     var formattedDate = (date.getFullYear())+'/'+
@@ -172,12 +172,19 @@
                                     <div class="box">
                                       <div class="box-header with-border">
                                         <small><b><%=writtenPosts[i].Title%></b></small>
+                                        <div class="box-tools pull-right">
+                                          <button type="button" name="button1" class="btn btn-box-tool">
+                                            <i class="fa fa-cog"></i>
+                                          </button>
+                                          <button type="button" name="button1" class="btn btn-box-tool">
+                                            <i class="fa fa-times"></i>
+                                          </button>
+                                        </div>
                                       </div>
                                       <div class="box-body">
                                         <small class="pull-right"><%=writtenPosts[i].ID%>, <%=formattedDate%></small><br>
-                                        이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다. 이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.
-                                        이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.
-                                        이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.이곳에는 내용이 들어갈 것입니다.<hr>
+                                        <%=writtenPosts[i].Content%>
+                                        <hr>
                                         <div class="col-md-3">
                                           이곳에는 사진이 들어갈 것입니다.
                                         </div>

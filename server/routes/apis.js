@@ -27,6 +27,7 @@ router.post('/writePost', function (req, res, next) {
   var value = {
     ID            : req.session.passport.user.user_id,
     Title         : req.body.Title,
+    Content       : req.body.Content,
     URL           : req.body.URL
   };
 
