@@ -131,6 +131,9 @@
                                               <small>좋아요(X)</small>
                                             </div>
                                             <div class="col-md-9">
+                                              <% if(likedPosts[i].HashTag==null) { %>
+                                                <small>-</small>
+                                              <% } else { %>
                                               <% while(likedPosts[i].HashTag!=null) { %>
                                                 <small>
                                                   <a href="#">
@@ -140,7 +143,7 @@
                                                 <%  if(i==likedPosts.length-1) break;
                                                     if(likedPosts[i].NO!==likedPosts[i+1].NO) break;
                                                     i++;
-                                              } %>
+                                              }} %>
                                             </div>
                                           </div> <!-- likes and hashtags -->
                                         </div>
@@ -220,6 +223,9 @@
                                               <small>좋아요(X)</small>
                                             </div>
                                             <div class="col-md-9">
+                                              <% if(writtenPosts[i].HashTag==null) { %>
+                                                <small>-</small>
+                                              <% } else { %>
                                               <% while(writtenPosts[i].HashTag!=null) { %>
                                                 <small>
                                                   <a href="#">
@@ -229,7 +235,7 @@
                                                 <%  if(i==writtenPosts.length-1) break;
                                                     if(writtenPosts[i].NO!==writtenPosts[i+1].NO) break;
                                                     i++;
-                                              } %>
+                                              }} %>
                                             </div>
                                           </div> <!-- likes and hashtags -->
                                         </div>

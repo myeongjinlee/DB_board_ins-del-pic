@@ -23,9 +23,9 @@
       <!-- AdminLTE Skins. Choose a skin from the css/skins
            folder instead of downloading all of them to reduce the load. -->
       <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
-
   </head>
   <body>
+
     <div class='preloader'><div class='loaded'>&nbsp;</div></div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -107,9 +107,17 @@
                               <hr>
                               <div class="row">
                                 <div class="col-md-3">
-                                  <small>좋아요(X)</small>
+                                  <ul class="bs-glyphicons">
+                                    <li>
+                                      <span class"glyphicon glyphicon-heart"></span>
+                                    </li>
+                                    <i class="fa fa-fw fa-heart-o"></i>
+                                  <ul>
                                 </div>
                                 <div class="col-md-9">
+                                  <% if(boards[i].HashTag==null) { %>
+                                    <small>-</small>
+                                  <% } else { %>
                                   <% while(boards[i].HashTag!=null) { %>
                                     <small>
                                       <a href="#">
@@ -119,7 +127,7 @@
                                     <%  if(i==boards.length-1) break;
                                         if(boards[i].NO!==boards[i+1].NO) break;
                                         i++;
-                                  } %>
+                                  }} %>
                                 </div>
                               </div> <!-- likes and hashtags -->
                             </div>
@@ -240,5 +248,15 @@
       <script src="/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes -->
       <script src="/dist/js/demo.js"></script>
+      <script>
+        $(document).ready(function () {
+          $('.fa-heart-o').click(function () {
+            $(this).removeClass('fa-heart-o').addClass('fa-heart');
+          })
+          $('.fa-heart').click(function () {
+            $(this).removeClass('fa-heart').addClass('fa-heart-o');
+          })
+        })
+      </script>
   </body>
   </html>
