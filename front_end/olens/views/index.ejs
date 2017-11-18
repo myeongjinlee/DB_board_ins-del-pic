@@ -13,7 +13,6 @@
       <link rel="stylesheet" href="assets/css/responsive.css" />
       <!-- button <--></-->
       <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-
   </head>
   <body>
     <div class='preloader'><div class='loaded'>&nbsp;</div></div>
@@ -83,8 +82,6 @@
           for(var i=0;i<rows.length;i++)
           {
             var oneItem = rows[i];
-            var titlecon = title[i];
-            console.log(titlecon);
         %>
           <div id="cd-timeline" class="cd-container">
             <div class="cd-timeline-block">
@@ -92,8 +89,8 @@
                 </div> <!-- cd-timeline-img -->
                 <div class="cd-timeline-content">
           <p><%=oneItem.create_date%></p>
-                    <h2><%=title[i]%></h2>
-                    <p><%=oneItem.Content%></p>
+                    <h2><%=oneItem.Content%></h2>
+                    <p>제목 긁어와</p>
                     <!-- <%=oneItem.URL%> -->
                     <a href="#" class="cd-read-more">Read more</a>
                     <span class="cd-date"><img src="assets/images/timeline/timeline.png" alt="timeline" /></span>
@@ -106,17 +103,20 @@
                   </div> <!-- cd-timeline-img -->
                   <div class="cd-timeline-content">
             <p><%=oneItem.create_date%></p>
-                      <h2><%=title[i]%></h2>
-                      <p><%=oneItem.Content%></p>
+                      <h2><%=oneItem.Content%></h2>
+                      <p>제목 긁어와</p>
                       <!-- <%=oneItem.URL%> -->
                       <a href="#" class="cd-read-more">Read more</a>
                       <span class="cd-date"><img src="assets/images/timeline/timeline.png" alt="timeline" /></span>
                   </div> <!-- cd-timeline-content -->
               </div> <!-- cd-timeline-block -->
             </div>
+          </div>
         <%
           }
         %>
+
+
         <!--Footer-->
         <footer id="footer" class="sections footer different-bg">
         <div class="container">

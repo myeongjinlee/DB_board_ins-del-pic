@@ -31,7 +31,7 @@ router.use(session({
 var conn = mysql.createConnection({
 host : 'localhost',
 user : 'root',
-password : '1234',
+password : 'dlaudwls2!',
 database : 'olens',
 });
 

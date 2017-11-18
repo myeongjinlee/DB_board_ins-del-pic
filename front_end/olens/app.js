@@ -34,25 +34,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules'))); // 노드모듈 디렉토토리 추가
 
-app.use('/', index);
-app.use('/users', users);
-app.use('/join', join);
+
 
 /*==============================================
   regist the middleware called 'passport'
   about Login module.                          */
 
-app.use(cookieSession({
-  name: 'olens'         /* cookie name */,
-  keys: ['test_olens']  /* secret key */,
-  cookie: {             /* expiration time */
-    maxAge: 1000 * 60 * 60 // 1 hour.
-  }
-})) // cookieSession은 request 객체를 통해 session을 다룰수 있게 설정해준다.
+// app.use(cookieSession({
+//   name: 'olens'         /* cookie name */,
+//   keys: ['test_olens']  /* secret key */,
+//   cookie: {             /* expiration time */
+//     maxAge: 1000 * 60 * 60 // 1 hour.
+//   }
+// })) // cookieSession은 request 객체를 통해 session을 다룰수 있게 설정해준다.
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 /*=============================================*/
+app.use('/', index);
+app.use('/users', users);
+app.use('/join', join);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
