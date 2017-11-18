@@ -10,17 +10,17 @@ router.get('/', function(req, res, next) {
   var user_info = req.session.passport.user;
 
   var first_query = 'select * from boards left join hashtags on boards.NO=hashtags.NO where boards.NO \
-                    in (select NO from is_like where ID=?)';
+                    in (select NO from is_like where ID=?) order by boards.NO asc, hit desc';
   connection.query(first_query, user_info.user_id, function (err, first_results) {
     if(err) {
       console.error('query error : ' + err);
     } else {
-      var second_query = 'select * from boards left join hashtags on boards.NO=hashtags.NO where ID = ?';
+      var second_query = 'select * from boards left join hashtags on boards.NO=hashtags.NO where ID = ? \
+                      order by boards.NO asc, hit desc';
       connection.query(second_query, user_info.user_id, function (err, second_results) {
         if(err) {
           console.error('query error : ' + err);
         } else {
-          console.log(second_results);
           res.render('mypage', {
             user : user_info,
             likedPosts : first_results,

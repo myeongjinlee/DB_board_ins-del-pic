@@ -62,7 +62,8 @@ router.get('/', function(req, res, next) {
   var user_info = req.session.passport===undefined ?
     0 : req.session.passport.user;
 
-  var query = 'select * from boards left join hashtags on boards.NO=hashtags.NO order by hit desc';
+  var query = 'select * from boards left join hashtags on boards.NO=hashtags.NO \
+                order by hit desc, boards.NO asc';
   connection.query(query, function (err, result) {
     if(err) {
         console.error('query error : ' + err);
