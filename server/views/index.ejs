@@ -25,7 +25,6 @@
       <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
   </head>
   <body>
-
     <div class='preloader'><div class='loaded'>&nbsp;</div></div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -111,8 +110,13 @@
                                     <li>
                                       <span class"glyphicon glyphicon-heart"></span>
                                     </li>
-                                    <i class="fa fa-fw fa-heart-o" style="display: none;"></i>
-                                    <i class="fa fa-fw fa-heart" style=""></i>
+                                    <i class="fa fa-fw fa-heart-o" style=""></i>
+                                    <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                    <% if(boards[i].likes) {%>
+                                      <%=boards[i].likes%>
+                                    <% } else { %>
+                                      0
+                                    <% } %>
                                   <ul>
                                 </div>
                                 <div class="col-md-9">

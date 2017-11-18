@@ -128,7 +128,18 @@
                                           <hr>
                                           <div class="row">
                                             <div class="col-md-3">
-                                              <small>좋아요(X)</small>
+                                              <ul class="bs-glyphicons">
+                                                <li>
+                                                  <span class"glyphicon glyphicon-heart"></span>
+                                                </li>
+                                                <i class="fa fa-fw fa-heart-o" style=""></i>
+                                                <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                                <% if(likedPosts[i].likes) {%>
+                                                  <%=likedPosts[i].likes%>
+                                                <% } else { %>
+                                                  0
+                                                <% } %>
+                                              <ul>
                                             </div>
                                             <div class="col-md-9">
                                               <% if(likedPosts[i].HashTag==null) { %>
@@ -220,7 +231,18 @@
                                           <hr>
                                           <div class="row">
                                             <div class="col-md-3">
-                                              <small>좋아요(X)</small>
+                                              <ul class="bs-glyphicons">
+                                                <li>
+                                                  <span class"glyphicon glyphicon-heart"></span>
+                                                </li>
+                                                <i class="fa fa-fw fa-heart-o" style=""></i>
+                                                <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                                <% if(writtenPosts[i].likes) {%>
+                                                  <%=writtenPosts[i].likes%>
+                                                <% } else { %>
+                                                  0
+                                                <% } %>
+                                              <ul>
                                             </div>
                                             <div class="col-md-9">
                                               <% if(writtenPosts[i].HashTag==null) { %>
@@ -371,5 +393,12 @@
       <script src="/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes -->
       <script src="/dist/js/demo.js"></script>
+      <script>
+        $(document).ready(function () {
+          $('.bs-glyphicons').click(function () {
+            $(this).find('i').toggle();
+          })
+        })
+      </script>      
   </body>
   </html>

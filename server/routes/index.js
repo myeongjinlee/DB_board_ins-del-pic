@@ -62,8 +62,21 @@ router.get('/', function(req, res, next) {
   var user_info = req.session.passport===undefined ?
     0 : req.session.passport.user;
 
-  var query = 'select * from boards left join hashtags on boards.NO=hashtags.NO \
-                order by hit desc, boards.NO asc';
+  // var query = 'select * from boards left join hashtags on boards.NO=hashtags.NO \
+  //               order by hit desc, boards.NO asc';
+  var query =
+  'select boards.NO as NO, Hit, Create_date, ID, Title, \
+  Content, URL, MetaTitle, MetaContent, MetaImage, HashTag, likes \
+  from (boards left join hashtags on boards.No=hashtags.NO) \
+  left join total_likes on boards.NO = total_likes.NO \
+  order by hit desc, boards.NO asc';
+  /* total_likes view is...
+    create view as
+    select No, count(*) as likes
+    from boards, is_like
+    where boards.No = is_like.NO
+    group by boards.No
+  */
   connection.query(query, function (err, result) {
     if(err) {
         console.error('query error : ' + err);

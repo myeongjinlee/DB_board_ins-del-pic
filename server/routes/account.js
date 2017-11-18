@@ -9,14 +9,32 @@ var connection = mysql_dbc.init();
 router.get('/', function(req, res, next) {
   var user_info = req.session.passport.user;
 
-  var first_query = 'select * from boards left join hashtags on boards.NO=hashtags.NO where boards.NO \
-                    in (select NO from is_like where ID=?) order by boards.NO asc, hit desc';
+  var first_query =
+  'select boards.NO as NO, Hit, Create_date, ID, Title, \
+  Content, URL, MetaTitle, MetaContent, MetaImage, HashTag, likes \
+  from (boards left join hashtags on boards.NO=hashtags.NO) \
+  left join total_likes on boards.NO = total_likes.NO \
+  where boards.NO in ( select NO from is_like where ID=? ) \
+  order by boards.NO asc, hit desc';
+  /* total_likes view is...
+    create view as
+    select No, count(*) as likes
+    from boards, is_like
+    where boards.No = is_like.NO
+    group by boards.No
+  */
   connection.query(first_query, user_info.user_id, function (err, first_results) {
     if(err) {
       console.error('query error : ' + err);
     } else {
-      var second_query = 'select * from boards left join hashtags on boards.NO=hashtags.NO where ID = ? \
-                      order by boards.NO asc, hit desc';
+      var second_query =
+      'select boards.NO as NO, Hit, Create_date, ID, Title, \
+      Content, URL, MetaTitle, MetaContent, MetaImage, HashTag, likes \
+      from (boards left join hashtags on boards.NO=hashtags.NO) \
+      left join total_likes on boards.NO = total_likes.NO \
+      where ID = ? \
+      order by boards.NO asc, hit desc';
+
       connection.query(second_query, user_info.user_id, function (err, second_results) {
         if(err) {
           console.error('query error : ' + err);
