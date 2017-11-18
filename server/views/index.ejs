@@ -111,7 +111,8 @@
                                     <li>
                                       <span class"glyphicon glyphicon-heart"></span>
                                     </li>
-                                    <i class="fa fa-fw fa-heart-o"></i>
+                                    <i class="fa fa-fw fa-heart-o" style="display: none;"></i>
+                                    <i class="fa fa-fw fa-heart" style=""></i>
                                   <ul>
                                 </div>
                                 <div class="col-md-9">
@@ -250,11 +251,8 @@
       <script src="/dist/js/demo.js"></script>
       <script>
         $(document).ready(function () {
-          $('.fa-heart-o').click(function () {
-            $(this).removeClass('fa-heart-o').addClass('fa-heart');
-          })
-          $('.fa-heart').click(function () {
-            $(this).removeClass('fa-heart').addClass('fa-heart-o');
+          $('.bs-glyphicons').click(function () {
+            $(this).find('i').toggle();
           })
         })
       </script>
