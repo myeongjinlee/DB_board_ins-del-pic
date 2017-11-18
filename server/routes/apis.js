@@ -34,6 +34,22 @@ router.post('/writePost', function (req, res, next) {
     var title = $('meta[property="og:title"]').attr('content');
     var content = $('meta[property="og:description"]').attr('content');
     var image = $('meta[property="og:image"]').attr('content');
+    if(title == null) {
+      title = $('title').text();
+    }
+    if(title == null) {
+      title = $('h1').text();
+    }
+    if(title == null) {
+      title = $('h2').text();
+    }
+    if(content == null) {
+      content = $('p').text().substr(0,100);
+    }
+    if(image == null) {
+      image = $('img').attr('src');
+      console.log(image);
+    }
 
     var value = {
       ID            : req.session.passport.user.user_id,
