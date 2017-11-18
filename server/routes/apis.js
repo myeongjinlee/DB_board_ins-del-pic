@@ -31,14 +31,31 @@ router.post('/writePost', function (req, res, next) {
     URL           : req.body.URL
   };
 
-  var query = 'insert into BOARDS SET NO = NULL, ?, Hit = 0, Create_date = now()';
-  connection.query(query, value, function (err, result) {
+  var HashTags = req.body.HashTags;
+  HashTags = HashTags.split(',');
+
+  var first_query = 'insert into BOARDS SET NO = NULL, ?, Hit = 0, Create_date = now()';
+  connection.query(first_query, value, function (err, result) {
     if(err) {
       console.log('err :' + err);
       res.send('<script>alert("등록 중 에러가 발생하였습니다.");location.href="/account/writePost";</script>');
     } else {
-      console.log('게시글 등록이 완료되었습니다.');
-      res.send('<script>alert("게시글 등록이 완료되었습니다.");location.href="/account/";</script>');
+      var NO = result.insertId;
+      var second_query = 'insert into HASHTAGS(NO,HashTag) VALUES';
+      for(var i=0; i<HashTags.length; i++) {
+        second_query += '(' + NO + ',' + '"' + HashTags[i] + '"' + ')';
+        if(i!=HashTags.length-1) second_query +=',';
+      } second_query += ';';
+
+      connection.query(second_query,function (err, result) {
+        if(err) {
+          console.log('err :' + err);
+          res.send('<script>alert("등록 중 에러가 발생하였습니다.");location.href="/account/writePost";</script>');
+        } else {
+          console.log('게시글 등록이 완료되었습니다.');
+          res.send('<script>alert("게시글 등록이 완료되었습니다.");location.href="/account/";</script>');
+        }
+      })
     }
   })
 })

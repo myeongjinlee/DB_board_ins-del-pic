@@ -9,16 +9,18 @@ var connection = mysql_dbc.init();
 router.get('/', function(req, res, next) {
   var user_info = req.session.passport.user;
 
-  var first_query = 'select * from boards where NO in (select NO from is_like where ID= ?)';
+  var first_query = 'select * from boards left join hashtags on boards.NO=hashtags.NO where boards.NO \
+                    in (select NO from is_like where ID=?)';
   connection.query(first_query, user_info.user_id, function (err, first_results) {
     if(err) {
       console.error('query error : ' + err);
     } else {
-      var second_query = 'select * from boards where ID = ? order by NO asc';
+      var second_query = 'select * from boards left join hashtags on boards.NO=hashtags.NO where ID = ?';
       connection.query(second_query, user_info.user_id, function (err, second_results) {
         if(err) {
           console.error('query error : ' + err);
         } else {
+          console.log(second_results);
           res.render('mypage', {
             user : user_info,
             likedPosts : first_results,

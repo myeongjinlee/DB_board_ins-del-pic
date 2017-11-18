@@ -122,7 +122,24 @@
                                         <div class="col-md-9">
                                           <b>이곳에는 타이틀,</b> <br>
                                           내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
-                                          <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 </small>
+
+                                          <div class="row">
+                                            <div class="col-md-3">
+                                              <small>좋아요(X)</small>
+                                            </div>
+                                            <div class="col-md-9">
+                                              <% while(likedPosts[i].HashTag!=null) { %>
+                                                <small>
+                                                  <a href="#">
+                                                    #<%=likedPosts[i].HashTag%>
+                                                  </a>
+                                                </small>
+                                                <%  if(i==likedPosts.length-1) break;
+                                                    if(likedPosts[i].NO!==likedPosts[i+1].NO) break;
+                                                    i++;
+                                              } %>
+                                            </div>
+                                          </div> <!-- likes and hashtags -->
                                         </div>
                                       </div>
                                     </div>
@@ -191,7 +208,24 @@
                                         <div class="col-md-9">
                                           <b>이곳에는 타이틀,</b> <br>
                                           내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
-                                          <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 </small>
+
+                                          <div class="row">
+                                            <div class="col-md-3">
+                                              <small>좋아요(X)</small>
+                                            </div>
+                                            <div class="col-md-9">
+                                              <% while(writtenPosts[i].HashTag!=null) { %>
+                                                <small>
+                                                  <a href="#">
+                                                    #<%=writtenPosts[i].HashTag%>
+                                                  </a>
+                                                </small>
+                                                <%  if(i==writtenPosts.length-1) break;
+                                                    if(writtenPosts[i].NO!==writtenPosts[i+1].NO) break;
+                                                    i++;
+                                              } %>
+                                            </div>
+                                          </div> <!-- likes and hashtags -->
                                         </div>
                                       </div>
                                     </div>
