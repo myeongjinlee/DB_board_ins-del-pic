@@ -116,13 +116,16 @@
                                         <small class="pull-right"><%=likedPosts[i].ID%>, <%=formattedDate%></small><br>
                                         <%=likedPosts[i].Content%>
                                         <hr>
-                                        <div class="col-md-3">
-                                          이곳에는 사진이 들어갈 것입니다.
+                                        <div class="col-md-4">
+                                          <a href='<%=likedPosts[i].URL%>'><img src='<%=likedPosts[i].MetaImage%>' alt="준비중" ></a>
                                         </div>
-                                        <div class="col-md-9">
-                                          <b>이곳에는 타이틀,</b> <br>
-                                          내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
-
+                                        <div class="col-md-8">
+                                          <b>
+                                            <%=likedPosts[i].MetaTitle%>
+                                          </b>
+                                          <br>
+                                          <%=likedPosts[i].MetaContent%>
+                                          <hr>
                                           <div class="row">
                                             <div class="col-md-3">
                                               <small>좋아요(X)</small>
@@ -202,13 +205,16 @@
                                         <small class="pull-right"><%=writtenPosts[i].ID%>, <%=formattedDate%></small><br>
                                         <%=writtenPosts[i].Content%>
                                         <hr>
-                                        <div class="col-md-3">
-                                          이곳에는 사진이 들어갈 것입니다.
+                                        <div class="col-md-4">
+                                          <a href='<%=writtenPosts[i].URL%>'><img src='<%=writtenPosts[i].MetaImage%>' alt="준비중" ></a>
                                         </div>
-                                        <div class="col-md-9">
-                                          <b>이곳에는 타이틀,</b> <br>
-                                          내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
-
+                                        <div class="col-md-8">
+                                          <b>
+                                            <%=writtenPosts[i].MetaTitle%>
+                                          </b>
+                                          <br>
+                                          <%=writtenPosts[i].MetaContent%>
+                                          <hr>
                                           <div class="row">
                                             <div class="col-md-3">
                                               <small>좋아요(X)</small>
