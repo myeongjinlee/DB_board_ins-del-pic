@@ -114,11 +114,13 @@
                                     </li>
                                     <i class="fa fa-fw fa-heart-o" style=""></i>
                                     <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                    <span id="likes">
                                     <% if(boards[i].Likes) {%>
-                                      <%=boards[i].Likes%>
+                                        <%=boards[i].Likes%>
                                     <% } else { %>
-                                      0
+                                        0
                                     <% } %>
+                                  </span>
                                   <ul>
                                 </div>
                                 <div class="col-md-9">
@@ -127,8 +129,10 @@
                                   <% } else { %>
                                   <% for(var j=0; j<boards[i].HashTags.length; j++) { %>
                                     <small>
-                                      <a href="#">
-                                        #<%=boards[i].HashTags[j]%>
+                                      <a href="#" style="color:black">
+                                        <b>
+                                          #<%=boards[i].HashTags[j]%>
+                                        </b>
                                       </a>
                                     </small>
                                   <% }} %>
@@ -254,10 +258,28 @@
       <script src="/dist/js/demo.js"></script>
       <script>
         $(document).ready(function () {
-          $('.bs-glyphicons').click(function () {
-            $(this).find('i').toggle();
+          $('.fa-heart-o').click(function () {
+            var $this = $(this).parent();
+            var likes = $this.find('#likes').text();
+            likes = parseInt(likes) + 1;
+            $this.find('#likes').text(likes);
+
+            $this.find('.fa-heart').show();
+            $(this).hide();
+
+          })
+          $('.fa-heart').click(function () {
+            var $this = $(this).parent();
+            var likes = $this.find('#likes').text();
+            likes = parseInt(likes) - 1;
+            $this.find('#likes').text(likes);
+
+            $this.find('.fa-heart-o').show();
+            $(this).hide();
           })
         })
+        // NOTE: note : index.ejs에만 적용, AJAX는 따로 구현해야함,
+        // NOTE: 사용자가 좋아했는지를 얻기위해 쿼리문 수정, 수정된 쿼리문에 대한 뷰 수정 해야함.
       </script>
   </body>
   </html>
