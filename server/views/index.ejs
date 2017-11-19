@@ -84,6 +84,8 @@
                       var formattedDate = (date.getFullYear())+'/'+
                                           (date.getMonth()+1)+'/'+
                                           (date.getDate());
+                      if(boards[i].HashTags)
+                        boards[i].HashTags = boards[i].HashTags.split(',');
                     %>
                       <div class="col-md-6">
                         <div class="box">
@@ -112,27 +114,24 @@
                                     </li>
                                     <i class="fa fa-fw fa-heart-o" style=""></i>
                                     <i class="fa fa-fw fa-heart" style="display: none;"></i>
-                                    <% if(boards[i].likes) {%>
-                                      <%=boards[i].likes%>
+                                    <% if(boards[i].Likes) {%>
+                                      <%=boards[i].Likes%>
                                     <% } else { %>
                                       0
                                     <% } %>
                                   <ul>
                                 </div>
                                 <div class="col-md-9">
-                                  <% if(boards[i].HashTag==null) { %>
+                                  <% if(boards[i].HashTags==null) { %>
                                     <small>-</small>
                                   <% } else { %>
-                                  <% while(boards[i].HashTag!=null) { %>
+                                  <% for(var j=0; j<boards[i].HashTags.length; j++) { %>
                                     <small>
                                       <a href="#">
-                                        #<%=boards[i].HashTag%>
+                                        #<%=boards[i].HashTags[j]%>
                                       </a>
                                     </small>
-                                    <%  if(i==boards.length-1) break;
-                                        if(boards[i].NO!==boards[i+1].NO) break;
-                                        i++;
-                                  }} %>
+                                  <% }} %>
                                 </div>
                               </div> <!-- likes and hashtags -->
                             </div>

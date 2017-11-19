@@ -66,16 +66,21 @@ router.get('/', function(req, res, next) {
   //               order by hit desc, boards.NO asc';
   var query =
   'select boards.NO as NO, Hit, Create_date, ID, Title, \
-  Content, URL, MetaTitle, MetaContent, MetaImage, HashTag, likes \
-  from (boards left join hashtags on boards.No=hashtags.NO) \
+  Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes \
+  from (boards left join concat_hashtags on boards.NO=concat_hashtags.NO) \
   left join total_likes on boards.NO = total_likes.NO \
   order by hit desc, boards.NO asc';
   /* total_likes view is...
-    create view as
-    select No, count(*) as likes
+    create view total_likes as
+    select boards.NO, count(*) as Likes
     from boards, is_like
-    where boards.No = is_like.NO
-    group by boards.No
+    where boards.NO = is_like.NO
+    group by boards.NO;
+
+    concat_hashtags view is...
+    create view concat_hashtags as
+    select NO, group_concat(hashtag separator ',')) as HashTags
+    from hashtags group by hashtags.NO;
   */
   connection.query(query, function (err, result) {
     if(err) {

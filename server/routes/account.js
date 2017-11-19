@@ -11,17 +11,22 @@ router.get('/', function(req, res, next) {
 
   var first_query =
   'select boards.NO as NO, Hit, Create_date, ID, Title, \
-  Content, URL, MetaTitle, MetaContent, MetaImage, HashTag, likes \
-  from (boards left join hashtags on boards.NO=hashtags.NO) \
+  Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes \
+  from (boards left join concat_hashtags on boards.NO=concat_hashtags.NO) \
   left join total_likes on boards.NO = total_likes.NO \
   where boards.NO in ( select NO from is_like where ID=? ) \
   order by boards.NO asc, hit desc';
   /* total_likes view is...
-    create view as
-    select No, count(*) as likes
+    create view total_likes as
+    select boards.NO, count(*) as Likes
     from boards, is_like
-    where boards.No = is_like.NO
-    group by boards.No
+    where boards.NO = is_like.NO
+    group by boards.NO;
+
+    concat_hashtags view is...
+    create view concat_hashtags as
+    select NO, group_concat(hashtag separator ',')) as HashTags
+    from hashtags group by hashtags.NO;
   */
   connection.query(first_query, user_info.user_id, function (err, first_results) {
     if(err) {
@@ -29,8 +34,8 @@ router.get('/', function(req, res, next) {
     } else {
       var second_query =
       'select boards.NO as NO, Hit, Create_date, ID, Title, \
-      Content, URL, MetaTitle, MetaContent, MetaImage, HashTag, likes \
-      from (boards left join hashtags on boards.NO=hashtags.NO) \
+      Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes \
+      from (boards left join concat_hashtags on boards.NO=concat_hashtags.NO) \
       left join total_likes on boards.NO = total_likes.NO \
       where ID = ? \
       order by boards.NO asc, hit desc';

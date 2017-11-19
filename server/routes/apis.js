@@ -48,7 +48,6 @@ router.post('/writePost', function (req, res, next) {
     }
     if(image == null) {
       image = $('img').attr('src');
-      console.log(image);
     }
 
     var value = {

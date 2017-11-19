@@ -106,6 +106,8 @@
                                   var formattedDate = (date.getFullYear())+'/'+
                                                       (date.getMonth()+1)+'/'+
                                                       (date.getDate());
+                                  if(likedPosts[i].HashTags)
+                                    likedPosts[i].HashTags = likedPosts[i].HashTags.split(',');
                                 %>
                                   <div class="col-md-4">
                                     <div class="box">
@@ -134,27 +136,24 @@
                                                 </li>
                                                 <i class="fa fa-fw fa-heart-o" style=""></i>
                                                 <i class="fa fa-fw fa-heart" style="display: none;"></i>
-                                                <% if(likedPosts[i].likes) {%>
-                                                  <%=likedPosts[i].likes%>
+                                                <% if(likedPosts[i].Likes) {%>
+                                                  <%=likedPosts[i].Likes%>
                                                 <% } else { %>
                                                   0
                                                 <% } %>
                                               <ul>
                                             </div>
                                             <div class="col-md-9">
-                                              <% if(likedPosts[i].HashTag==null) { %>
+                                              <% if(likedPosts[i].HashTags==null) { %>
                                                 <small>-</small>
                                               <% } else { %>
-                                              <% while(likedPosts[i].HashTag!=null) { %>
+                                              <% for(var j=0; j<likedPosts[i].HashTags.length; j++) { %>
                                                 <small>
                                                   <a href="#">
-                                                    #<%=likedPosts[i].HashTag%>
+                                                    #<%=likedPosts[i].HashTags[j]%>
                                                   </a>
                                                 </small>
-                                                <%  if(i==likedPosts.length-1) break;
-                                                    if(likedPosts[i].NO!==likedPosts[i+1].NO) break;
-                                                    i++;
-                                              }} %>
+                                              <% }} %>
                                             </div>
                                           </div> <!-- likes and hashtags -->
                                         </div>
@@ -201,6 +200,8 @@
                                     var formattedDate = (date.getFullYear())+'/'+
                                                         (date.getMonth()+1)+'/'+
                                                         (date.getDate());
+                                    if(writtenPosts[i].HashTags)
+                                      writtenPosts[i].HashTags = writtenPosts[i].HashTags.split(',');
                                   %>
                                   <div class="col-md-4">
                                     <div class="box">
@@ -245,19 +246,16 @@
                                               <ul>
                                             </div>
                                             <div class="col-md-9">
-                                              <% if(writtenPosts[i].HashTag==null) { %>
+                                              <% if(writtenPosts[i].HashTags==null) { %>
                                                 <small>-</small>
                                               <% } else { %>
-                                              <% while(writtenPosts[i].HashTag!=null) { %>
+                                              <% for(var j=0; j<writtenPosts[i].HashTags.length; j++) { %>
                                                 <small>
                                                   <a href="#">
-                                                    #<%=writtenPosts[i].HashTag%>
+                                                    #<%=writtenPosts[i].HashTags[j]%>
                                                   </a>
                                                 </small>
-                                                <%  if(i==writtenPosts.length-1) break;
-                                                    if(writtenPosts[i].NO!==writtenPosts[i+1].NO) break;
-                                                    i++;
-                                              }} %>
+                                              <% }} %>
                                             </div>
                                           </div> <!-- likes and hashtags -->
                                         </div>
@@ -399,6 +397,6 @@
             $(this).find('i').toggle();
           })
         })
-      </script>      
+      </script>
   </body>
   </html>
