@@ -23,7 +23,6 @@
       <!-- AdminLTE Skins. Choose a skin from the css/skins
            folder instead of downloading all of them to reduce the load. -->
       <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
-
   </head>
   <body>
     <div class='preloader'><div class='loaded'>&nbsp;</div></div>
@@ -95,13 +94,47 @@
                             <small class="pull-right"><%=boards[i].ID%>, <%=formattedDate%></small><br>
                             <%=boards[i].Content%>
                             <hr>
-                            <div class="col-md-3">
-                              이곳에는 사진이 들어갈 것입니다.
+                            <div class="col-md-4">
+                              <a href='<%=boards[i].URL%>'><img src='<%=boards[i].MetaImage%>' alt="준비중" ></a>
                             </div>
-                            <div class="col-md-9">
-                              <b>이곳에는 타이틀,</b> <br>
-                              내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
-                              <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 | #해쉬태그3 </small>
+                            <div class="col-md-8">
+                              <b>
+                                <%=boards[i].MetaTitle%>
+                              </b>
+                              <br>
+                              <%=boards[i].MetaContent%>
+                              <hr>
+                              <div class="row">
+                                <div class="col-md-3">
+                                  <ul class="bs-glyphicons">
+                                    <li>
+                                      <span class"glyphicon glyphicon-heart"></span>
+                                    </li>
+                                    <i class="fa fa-fw fa-heart-o" style=""></i>
+                                    <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                    <% if(boards[i].likes) {%>
+                                      <%=boards[i].likes%>
+                                    <% } else { %>
+                                      0
+                                    <% } %>
+                                  <ul>
+                                </div>
+                                <div class="col-md-9">
+                                  <% if(boards[i].HashTag==null) { %>
+                                    <small>-</small>
+                                  <% } else { %>
+                                  <% while(boards[i].HashTag!=null) { %>
+                                    <small>
+                                      <a href="#">
+                                        #<%=boards[i].HashTag%>
+                                      </a>
+                                    </small>
+                                    <%  if(i==boards.length-1) break;
+                                        if(boards[i].NO!==boards[i+1].NO) break;
+                                        i++;
+                                  }} %>
+                                </div>
+                              </div> <!-- likes and hashtags -->
                             </div>
                           </div>
                         </div>
@@ -220,5 +253,12 @@
       <script src="/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes -->
       <script src="/dist/js/demo.js"></script>
+      <script>
+        $(document).ready(function () {
+          $('.bs-glyphicons').click(function () {
+            $(this).find('i').toggle();
+          })
+        })
+      </script>
   </body>
   </html>

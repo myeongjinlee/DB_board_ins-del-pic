@@ -116,13 +116,47 @@
                                         <small class="pull-right"><%=likedPosts[i].ID%>, <%=formattedDate%></small><br>
                                         <%=likedPosts[i].Content%>
                                         <hr>
-                                        <div class="col-md-3">
-                                          이곳에는 사진이 들어갈 것입니다.
+                                        <div class="col-md-4">
+                                          <a href='<%=likedPosts[i].URL%>'><img src='<%=likedPosts[i].MetaImage%>' alt="준비중" ></a>
                                         </div>
-                                        <div class="col-md-9">
-                                          <b>이곳에는 타이틀,</b> <br>
-                                          내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
-                                          <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 </small>
+                                        <div class="col-md-8">
+                                          <b>
+                                            <%=likedPosts[i].MetaTitle%>
+                                          </b>
+                                          <br>
+                                          <%=likedPosts[i].MetaContent%>
+                                          <hr>
+                                          <div class="row">
+                                            <div class="col-md-3">
+                                              <ul class="bs-glyphicons">
+                                                <li>
+                                                  <span class"glyphicon glyphicon-heart"></span>
+                                                </li>
+                                                <i class="fa fa-fw fa-heart-o" style=""></i>
+                                                <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                                <% if(likedPosts[i].likes) {%>
+                                                  <%=likedPosts[i].likes%>
+                                                <% } else { %>
+                                                  0
+                                                <% } %>
+                                              <ul>
+                                            </div>
+                                            <div class="col-md-9">
+                                              <% if(likedPosts[i].HashTag==null) { %>
+                                                <small>-</small>
+                                              <% } else { %>
+                                              <% while(likedPosts[i].HashTag!=null) { %>
+                                                <small>
+                                                  <a href="#">
+                                                    #<%=likedPosts[i].HashTag%>
+                                                  </a>
+                                                </small>
+                                                <%  if(i==likedPosts.length-1) break;
+                                                    if(likedPosts[i].NO!==likedPosts[i+1].NO) break;
+                                                    i++;
+                                              }} %>
+                                            </div>
+                                          </div> <!-- likes and hashtags -->
                                         </div>
                                       </div>
                                     </div>
@@ -185,13 +219,47 @@
                                         <small class="pull-right"><%=writtenPosts[i].ID%>, <%=formattedDate%></small><br>
                                         <%=writtenPosts[i].Content%>
                                         <hr>
-                                        <div class="col-md-3">
-                                          이곳에는 사진이 들어갈 것입니다.
+                                        <div class="col-md-4">
+                                          <a href='<%=writtenPosts[i].URL%>'><img src='<%=writtenPosts[i].MetaImage%>' alt="준비중" ></a>
                                         </div>
-                                        <div class="col-md-9">
-                                          <b>이곳에는 타이틀,</b> <br>
-                                          내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
-                                          <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 </small>
+                                        <div class="col-md-8">
+                                          <b>
+                                            <%=writtenPosts[i].MetaTitle%>
+                                          </b>
+                                          <br>
+                                          <%=writtenPosts[i].MetaContent%>
+                                          <hr>
+                                          <div class="row">
+                                            <div class="col-md-3">
+                                              <ul class="bs-glyphicons">
+                                                <li>
+                                                  <span class"glyphicon glyphicon-heart"></span>
+                                                </li>
+                                                <i class="fa fa-fw fa-heart-o" style=""></i>
+                                                <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                                <% if(writtenPosts[i].likes) {%>
+                                                  <%=writtenPosts[i].likes%>
+                                                <% } else { %>
+                                                  0
+                                                <% } %>
+                                              <ul>
+                                            </div>
+                                            <div class="col-md-9">
+                                              <% if(writtenPosts[i].HashTag==null) { %>
+                                                <small>-</small>
+                                              <% } else { %>
+                                              <% while(writtenPosts[i].HashTag!=null) { %>
+                                                <small>
+                                                  <a href="#">
+                                                    #<%=writtenPosts[i].HashTag%>
+                                                  </a>
+                                                </small>
+                                                <%  if(i==writtenPosts.length-1) break;
+                                                    if(writtenPosts[i].NO!==writtenPosts[i+1].NO) break;
+                                                    i++;
+                                              }} %>
+                                            </div>
+                                          </div> <!-- likes and hashtags -->
                                         </div>
                                       </div>
                                     </div>
@@ -325,5 +393,12 @@
       <script src="/dist/js/adminlte.min.js"></script>
       <!-- AdminLTE for demo purposes -->
       <script src="/dist/js/demo.js"></script>
+      <script>
+        $(document).ready(function () {
+          $('.bs-glyphicons').click(function () {
+            $(this).find('i').toggle();
+          })
+        })
+      </script>      
   </body>
   </html>
