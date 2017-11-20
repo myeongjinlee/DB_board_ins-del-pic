@@ -101,12 +101,17 @@
                             <% } else { %>
 
                               <div class="row">
-                                <% for(var i=0; i<likedPosts.length; i++) {
-                                  var date = likedPosts[i].Create_date;
-                                  var formattedDate = (date.getFullYear())+'/'+
-                                                      (date.getMonth()+1)+'/'+
-                                                      (date.getDate());
-                                %>
+                            <%
+                              var k=0;
+                              for(var i=(page*page_num)-page_num; i<(page*page_num); i++) {
+                              if(i> likeleng) {i++;}
+                              else {var item = likedPosts[i];}
+                              var date = likedPosts[i].Create_date;
+                              var formattedDate = (date.getFullYear())+'/'+
+                                          (date.getMonth()+1)+'/'+
+                                          (date.getDate());
+
+                              %>
                                   <div class="col-md-4">
                                     <div class="box">
                                       <div class="box-header with-border">
@@ -117,11 +122,11 @@
                                         <%=likedPosts[i].Content%>
                                         <hr>
                                         <div class="col-md-3">
-                                          이곳에는 사진이 들어갈 것입니다.
+                                          <%=likeImgs[i]%>
                                         </div>
                                         <div class="col-md-9">
-                                          <b>이곳에는 타이틀,</b> <br>
-                                          내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
+                                          <b><%=likeTitle[i]%></b> <br>
+                                          <%=likeContents[i]%><hr>
                                           <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 </small>
                                         </div>
                                       </div>
@@ -162,12 +167,17 @@
                                     </a>
                                   </div>
 
-                                  <% for(var i=0; i<writtenPosts.length; i++) {
+                                  <%
+                                    var k=0;
+                                    for(var i=(page*page_num)-page_num; i<(page*page_num); i++) {
+                                    if(i> writeleng) {i++;}
+                                    else {var item = writtenPosts[i];}
                                     var date = writtenPosts[i].Create_date;
                                     var formattedDate = (date.getFullYear())+'/'+
-                                                        (date.getMonth()+1)+'/'+
-                                                        (date.getDate());
-                                  %>
+                                                (date.getMonth()+1)+'/'+
+                                                (date.getDate());
+
+                                    %>
                                   <div class="col-md-4">
                                     <div class="box">
                                       <div class="box-header with-border">
@@ -186,11 +196,11 @@
                                         <%=writtenPosts[i].Content%>
                                         <hr>
                                         <div class="col-md-3">
-                                          이곳에는 사진이 들어갈 것입니다.
+                                          <%=writeImgs%>
                                         </div>
                                         <div class="col-md-9">
-                                          <b>이곳에는 타이틀,</b> <br>
-                                          내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다.내용이 들어갈 것입니다. <hr>
+                                          <b><%=writeTitle%></b> <br>
+                                          <%=writeContents%> <hr>
                                           <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 </small>
                                         </div>
                                       </div>

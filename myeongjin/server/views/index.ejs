@@ -103,42 +103,25 @@
                       <h2><strong><%=item.Title%></strong></h2>
                       <p><h2><%=item.Content%></h2></p>
                       <span class="cd-date">
-                        <img src="<%=img[i]%>"width="400dp" height="200dp" alt="/"  onerror="this.src='../../assets/images/<%=k%>.jpg'" alt="게시글 이미지" />
+                        <img src="<%=img[i]%>"width="200dp" height="150dp" onerror="this.src='../../assets/images/<%=k%>.jpg'" alt="게시글 이미지" />
                         <br><br>
                         <div>
-                          <form class="form-horizontal" action="/apis/islike" method="post">
-                            <button type="submit" name="button" class="cd-read-more" value="<%=item.NO%>">좋아요</button>
-                          </form>
-                          <p><a href="<%=item.URL%>" class="cd-read-more">Read more</a></p>
+                          <div class="col-md-9">
+                            <b><%=title[i]%></b> <br>
+                          </div><br>
+                          <small><%=content[i]%></small>
                         </div>
                       </span>
-                      <div class="col-md-9">
-                        <b><%=title[i]%></b> <br>
-                        <small>#해쉬태그1 | #해쉬태그2 | #해쉬태그3 </small>
+                      <small>#해쉬태그1 | #해쉬태그2 | #해쉬태그3 </small>
+                      <div>
+                      <form class="form-horizontal" action="/apis/islike" method="post">
+                        <button type="submit" name="button" class="cd-read-more" value="<%=item.NO%>">좋아요</button>
+                      </form>
+                      <p><a href="<%=item.URL%>" class="cd-read-more">Read more</a></p>
                       </div>
                     </div>
                     </div>
                     </div>
-                      <!-- <div class="col-md-6">
-                        <div class="box">
-                          <div class="box-header with-border">
-                            <small><b><%=item.Title%></b></small>
-                          </div>
-                          <div class="box-body">
-                            <small class="pull-right"><%=item.ID%>, <%=formattedDate%></small><br>
-                            <%=item.Content%>
-                            <hr>
-                            <div class="col-md-3">
-                            <img src="<%=img[i]%>"width="400dp" height="200dp" alt="/"  onerror="this.src='../../assets/images/<%=k%>.jpg'" alt="게시글 이미지">
-                            </div>
-                            <div class="col-md-9">
-                              <b><%=title[i]%></b> <br>
-                              <small>좋아요(X)  |  #해쉬태그1 | #해쉬태그2 | #해쉬태그3 </small>
-                            </div>
-                              <a href="#" class="cd-read-more">Read more</a>
-                          </div>
-                        </div>
-                      </div> -->
                     <% }
                     for(var j=0; j<boards.length/4; j++){
                     %>
