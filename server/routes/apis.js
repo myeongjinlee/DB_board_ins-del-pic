@@ -99,15 +99,32 @@ router.post('/writePost', function (req, res, next) {
   })
 })
 
+/* 게시글 삭제, Ajax */
+router.post('/deletePost', function (req, res, next) {
+  var value = [req.body.user_id,req.body.board_no];
+  var query = 'delete from boards where ID=? and NO=?';
+
+  // NOTE: 쿼리 검증 필요! 비어있는 데 삭제할시 에러 등등..
+  connection.query(query, value, function (err, result) {
+    if(err) {
+      console.log('err: ' + err);
+      res.send({result:'failed'});
+    } else {
+      console.log('API delete post no.%s: success',req.body.board_no);
+      res.send({result:'success'});
+    }
+  })
+})
+
 /* Ajax : 좋아요 */
 router.post('/like', function (req, res, next) {
   var state = req.body.state;
   var value = [req.body.user_id,req.body.board_no];
 
   var query;
-  if(state=='do') {
+  if(state=='do') { /* 좋아요 등록 */
     query = 'insert into is_like SET ID=?, NO=?, Like_date = now()';
-  } else if(state=='undo'){
+  } else if(state=='undo'){ /* 좋아요 취소 */
     query = 'delete from is_like where ID=? ANd NO=?';
   } else {
     res.send({result:'failed'});
