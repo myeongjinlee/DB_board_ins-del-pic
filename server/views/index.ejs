@@ -259,6 +259,10 @@
       <script>
         $(document).ready(function () {
           $('.fa-heart-o').click(function () {
+            <% if(!user) { %>
+              alert('로그인이 필요합니다.');
+              return false;
+            <% } %>
             var $this = $(this).parent();
             var likes = $this.find('#likes').text();
             likes = parseInt(likes) + 1;

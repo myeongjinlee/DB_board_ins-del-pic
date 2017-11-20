@@ -7,8 +7,11 @@ var connection = mysql_dbc.init();
 
 /* 마이 페이지 */
 router.get('/', function(req, res, next) {
-  var user_info = req.session.passport.user;
+  if(req.session.passport===undefined || req.session.passport.user===undefined) {
+    res.send('<script>alert("로그인이 필요합니다.");location.href="/login";</script>');
+  }
 
+  var user_info = req.session.passport.user;
   var first_query =
   'select boards.NO as NO, Hit, Create_date, ID, Title, \
   Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes \
