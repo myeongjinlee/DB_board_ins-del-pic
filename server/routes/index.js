@@ -59,16 +59,19 @@ passport.use(new LocalStrategy({
 }));
 
 router.get('/', function(req, res, next) {
-  var user_info = req.session.passport===undefined ?
-    0 : req.session.passport.user;
+  var user_info;
+  if(req.session.passport===undefined || req.session.passport.user===undefined) {
+    user_info = 0;
+  } else {
+    user_info = req.session.passport.user;
+  }
 
-  // var query = 'select * from boards left join hashtags on boards.NO=hashtags.NO \
-  //               order by hit desc, boards.NO asc';
   var query =
-  'select boards.NO as NO, Hit, Create_date, ID, Title, \
-  Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes \
+  'select boards.NO as NO, Hit, Create_date, boards.ID as ID, Title, \
+  Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes, is_like.ID as WhoLike \
   from (boards left join concat_hashtags on boards.NO=concat_hashtags.NO) \
   left join total_likes on boards.NO = total_likes.NO \
+  left join is_like on boards.NO = is_like.NO and is_like.ID = ? \
   order by hit desc, boards.NO asc';
   /* total_likes view is...
     create view total_likes as
@@ -82,7 +85,9 @@ router.get('/', function(req, res, next) {
     select NO, group_concat(hashtag separator ',')) as HashTags
     from hashtags group by hashtags.NO;
   */
-  connection.query(query, function (err, result) {
+  connection.query(query,
+    user_info==0? '' : user_info.user_id,
+    function (err, result) {
     if(err) {
         console.error('query error : ' + err);
     } else {

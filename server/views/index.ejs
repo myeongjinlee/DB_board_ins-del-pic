@@ -112,8 +112,13 @@
                                     <li>
                                       <span class"glyphicon glyphicon-heart"></span>
                                     </li>
-                                    <i class="fa fa-fw fa-heart-o" style=""></i>
-                                    <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                    <% if(!user || user.user_id!= boards[i].WhoLike) { %>
+                                      <i class="fa fa-fw fa-heart-o" style=""></i>
+                                      <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                    <% } else { %>
+                                      <i class="fa fa-fw fa-heart-o" style="display: none"></i>
+                                      <i class="fa fa-fw fa-heart" style=""></i>
+                                    <% } %>
                                     <span id="likes">
                                     <% if(boards[i].Likes) {%>
                                         <%=boards[i].Likes%>
