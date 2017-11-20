@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
   if(req.session.passport===undefined || req.session.passport.user===undefined) {
     res.send('<script>alert("로그인이 필요합니다.");location.href="/login";</script>');
   }
+  console.log(req.session.passport.user);
 
   var user_info = req.session.passport.user;
   var first_query =
@@ -50,7 +51,7 @@ router.get('/', function(req, res, next) {
         function (err, second_results) {
           if(err) {
             console.error('query error : ' + err);
-          } else {
+          } else {console.log(second_results);console.log(second_results.length);console.log(first_results);console.log(first_results.length);
             res.render('mypage', {
               user : user_info,
               likedPosts : first_results,
@@ -62,6 +63,7 @@ router.get('/', function(req, res, next) {
       )
     }
   })
+
 });
 
 /* 게시글 등록 */

@@ -61,8 +61,10 @@
                         <div class="col-md-12" >
                             <div class="home-content">
                                 <h5>MY PAGE</h5>
-                                여기에 내 정보
-                                도연, 게시글 등록 수, 좋아요 받은 수 등이 출력됨.
+                                사용자 ID : <%=user.user_id%> <br>
+                                사용자 이름 : <%=user.nickname%><br>
+                                게시글 등록 수 : <%=writtenPosts.length%><br>
+                                좋아요 누른 수 : <%=likedPosts.length%><br>
                             </div>
                         </div>
                     </div>
@@ -87,7 +89,8 @@
                         </ul>
                         <div class="tab-content">
                           <div class="tab-pane active" id="tab_1">
-                            <% if(!likedPosts.length) { %>
+                            <% console.log('likepost : ' +likedPosts.length ) ;
+                            if(!likedPosts.length) { %>
                               <div class="row">
                                 <div class="col-md-12">
                                   <p>아직 좋아요를 누른 글이 없네요!</p>
@@ -130,7 +133,7 @@
                                           <hr>
                                           <div class="row">
                                             <div class="col-md-3">
-                                              <ul class="bs-glyphicons" data-no="<%=writtenPosts[i].NO%>" >
+                                              <ul class="bs-glyphicons" data-no="<%=likedPosts[i].NO%>" >
                                                 <i class="fa fa-fw fa-heart-o" style="display: none;"></i>
                                                 <i class="fa fa-fw fa-heart" style=""></i>
                                                 <span id="likes">
