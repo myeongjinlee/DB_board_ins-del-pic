@@ -8,6 +8,7 @@ var connection = mysql_dbc.init();
 var request = require("request");
 var cheerio = require("cheerio");
 
+/* 회원 가입 */
 router.post('/createAccount', function(req, res, next) {
   var value = {
     ID            : req.body.id,
@@ -26,6 +27,7 @@ router.post('/createAccount', function(req, res, next) {
   });
 });
 
+/* 게시글 등록 */
 router.post('/writePost', function (req, res, next) {
   request(req.body.URL, function (err, req_res, html) {
     if(err) throw err;
@@ -88,6 +90,23 @@ router.post('/writePost', function (req, res, next) {
       }
     })
   })
+})
+
+/* Ajax : 좋아요 */
+router.post('/like', function (req, res, next) {
+  var state = req.body.state;
+  var user_id = req.body.user_id;
+  var board_no = req.body.board_no;
+  console.log(state);
+  console.log(user_id);
+  console.log(board_no);
+  /*
+    DB operation..
+    using state..
+    return result..
+  */
+  var result = 'success';
+  res.send({result:result});
 })
 
 module.exports = router;
