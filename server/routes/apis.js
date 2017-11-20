@@ -52,9 +52,16 @@ router.post('/writePost', function (req, res, next) {
       image = $('img').attr('src');
     }
 
+    var user_title;
+    if(req.body.Title) {
+      user_title = req.body.Title;
+    } else {
+      user_title = title;
+    }
+
     var value = {
       ID            : req.session.passport.user.user_id,
-      Title         : req.body.Title,
+      Title         : user_title,
       Content       : req.body.Content,
       URL           : req.body.URL,
       MetaTitle     : title,
