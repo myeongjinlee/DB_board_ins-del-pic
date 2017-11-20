@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
   if(req.session.passport===undefined || req.session.passport.user===undefined) {
     res.send('<script>alert("로그인이 필요합니다.");location.href="/login";</script>');
   }
+  console.log(req.session.passport.user);
 
   var user_info = req.session.passport.user;
   var first_query =
@@ -34,7 +35,7 @@ router.get('/', function(req, res, next) {
   connection.query(first_query, user_info.user_id, function (err, first_results) {
     if(err) {
       console.error('query error : ' + err);
-    } else {
+    } else {console.log(first_results.length);
       var second_query =
       'select boards.NO as NO, Hit, Create_date, boards.ID as ID, Title, \
       Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes, is_like.ID as WhoLike \
@@ -47,7 +48,7 @@ router.get('/', function(req, res, next) {
       connection.query(
         second_query,
         [user_info.user_id, user_info.user_id],
-        function (err, second_results) {
+        function (err, second_results) {console.log(second_results.length);console.log(second_results.Likes);
           if(err) {
             console.error('query error : ' + err);
           } else {
@@ -62,6 +63,7 @@ router.get('/', function(req, res, next) {
       )
     }
   })
+
 });
 
 /* 게시글 등록 */
