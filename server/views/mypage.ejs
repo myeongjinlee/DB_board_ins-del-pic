@@ -130,17 +130,16 @@
                                           <hr>
                                           <div class="row">
                                             <div class="col-md-3">
-                                              <ul class="bs-glyphicons">
-                                                <li>
-                                                  <span class"glyphicon glyphicon-heart"></span>
-                                                </li>
-                                                <i class="fa fa-fw fa-heart-o" style=""></i>
-                                                <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                              <ul class="bs-glyphicons" data-no="<%=writtenPosts[i].NO%>" >
+                                                <i class="fa fa-fw fa-heart-o" style="display: none;"></i>
+                                                <i class="fa fa-fw fa-heart" style=""></i>
+                                                <span id="likes">
                                                 <% if(likedPosts[i].Likes) {%>
                                                   <%=likedPosts[i].Likes%>
                                                 <% } else { %>
                                                   0
                                                 <% } %>
+                                                </span>
                                               <ul>
                                             </div>
                                             <div class="col-md-9">
@@ -149,8 +148,10 @@
                                               <% } else { %>
                                               <% for(var j=0; j<likedPosts[i].HashTags.length; j++) { %>
                                                 <small>
-                                                  <a href="#">
-                                                    #<%=likedPosts[i].HashTags[j]%>
+                                                  <a href="#" style="color:black">
+                                                    <b>
+                                                      #<%=likedPosts[i].HashTags[j]%>
+                                                    </b>
                                                   </a>
                                                 </small>
                                               <% }} %>
@@ -232,17 +233,21 @@
                                           <hr>
                                           <div class="row">
                                             <div class="col-md-3">
-                                              <ul class="bs-glyphicons">
-                                                <li>
-                                                  <span class"glyphicon glyphicon-heart"></span>
-                                                </li>
-                                                <i class="fa fa-fw fa-heart-o" style=""></i>
-                                                <i class="fa fa-fw fa-heart" style="display: none;"></i>
-                                                <% if(writtenPosts[i].likes) {%>
-                                                  <%=writtenPosts[i].likes%>
+                                              <ul class="bs-glyphicons" data-no="<%=writtenPosts[i].NO%>" >
+                                                <% if(!user || user.user_id!= writtenPosts[i].WhoLike) { %>
+                                                  <i class="fa fa-fw fa-heart-o" style=""></i>
+                                                  <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                                <% } else { %>
+                                                  <i class="fa fa-fw fa-heart-o" style="display: none"></i>
+                                                  <i class="fa fa-fw fa-heart" style=""></i>
+                                                <% } %>
+                                                <span id="likes">
+                                                <% if(writtenPosts[i].Likes) {%>
+                                                  <%=writtenPosts[i].Likes%>
                                                 <% } else { %>
                                                   0
                                                 <% } %>
+                                                </span>
                                               <ul>
                                             </div>
                                             <div class="col-md-9">
@@ -251,7 +256,7 @@
                                               <% } else { %>
                                               <% for(var j=0; j<writtenPosts[i].HashTags.length; j++) { %>
                                                 <small>
-                                                  <a href="#">
+                                                  <a href="#" style="color:black">
                                                     #<%=writtenPosts[i].HashTags[j]%>
                                                   </a>
                                                 </small>
@@ -393,8 +398,55 @@
       <script src="/dist/js/demo.js"></script>
       <script>
         $(document).ready(function () {
-          $('.bs-glyphicons').click(function () {
-            $(this).find('i').toggle();
+          $('.fa-heart-o').click(function () {
+            var $this = $(this).parent();
+            var likes = $this.find('#likes').text();
+            likes = parseInt(likes) + 1;
+
+            /* AJAX from client to server. */
+            $.post(
+              '/apis/like',
+              {
+                state : 'do',
+                user_id : '<%=user.user_id%>',
+                board_no : $this.attr("data-no")
+              },
+              function (data) {
+                if(data.result=='success') {
+                  $this.find('#likes').text(likes);
+                  $this.find('.fa-heart').show();
+                  $this.find('.fa-heart-o').hide();
+                } else {
+                  alert('좋아요 기능 에러');
+                }
+              },
+              'json'
+            )
+          })
+          $('.fa-heart').click(function () {
+            var $this = $(this).parent();
+            var likes = $this.find('#likes').text();
+            likes = parseInt(likes) - 1;
+
+            /* AJAX from client to server. */
+            $.post(
+              '/apis/like',
+              {
+                state : 'undo',
+                user_id : '<%=user.user_id%>',
+                board_no : $this.attr("data-no")
+              },
+              function (data) {
+                if(data.result=='success') {
+                  $this.find('#likes').text(likes);
+                  $this.find('.fa-heart-o').show();
+                  $this.find('.fa-heart').hide();
+                } else {
+                  alert('좋아요 기능 에러');
+                }
+              },
+              'json'
+            )
           })
         })
       </script>

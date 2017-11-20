@@ -36,25 +36,30 @@ router.get('/', function(req, res, next) {
       console.error('query error : ' + err);
     } else {
       var second_query =
-      'select boards.NO as NO, Hit, Create_date, ID, Title, \
-      Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes \
+      'select boards.NO as NO, Hit, Create_date, boards.ID as ID, Title, \
+      Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes, is_like.ID as WhoLike \
       from (boards left join concat_hashtags on boards.NO=concat_hashtags.NO) \
       left join total_likes on boards.NO = total_likes.NO \
-      where ID = ? \
+      left join is_like on boards.NO = is_like.NO and is_like.ID = ? \
+      where boards.ID = ? \
       order by boards.NO asc, hit desc';
 
-      connection.query(second_query, user_info.user_id, function (err, second_results) {
-        if(err) {
-          console.error('query error : ' + err);
-        } else {
-          res.render('mypage', {
-            user : user_info,
-            likedPosts : first_results,
-            writtenPosts : second_results,
-            categories : {} /* should feel */
-          });
+      connection.query(
+        second_query,
+        [user_info.user_id, user_info.user_id],
+        function (err, second_results) {
+          if(err) {
+            console.error('query error : ' + err);
+          } else {
+            res.render('mypage', {
+              user : user_info,
+              likedPosts : first_results,
+              writtenPosts : second_results,
+              categories : {} /* should feel */
+            });
+          }
         }
-      })
+      )
     }
   })
 });
