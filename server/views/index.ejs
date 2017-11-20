@@ -44,7 +44,8 @@
                         <li class="active"><a href="/">Home</a></li>
                         <% if(!user) { %>
                           <!-- <li><a href="/login">Login</a></li> -->
-                          <li><a data-toggle="modal" href="#myModal">Login</a></li>
+                          <!-- modal 창 설정 / backdrop은 밖에 부분 눌러도 안닫힘 / keyboard는 keyboard를 사용하여 닫지 않겠다 -->
+                          <li><a data-toggle="modal" data-backdrop="static" data-keyboard="false" href="#myModal">Login</a></li>
                           <!-- Modal -->
                               <div class="modal fade" id="myModal" role="dialog">
                               <div class="modal-dialog">
@@ -70,18 +71,19 @@
                                     </table>
                                     <div style="text-align : center">
                                     <button type="submit" class="btn btn-default abt-btn">Login</button>
-                                    <button type="button" class="btn btn-default abt-btn" data-toggle="modal" data-target="#mymodal">회원 가입</button>
+                                    <button type="button" class="btn btn-default abt-btn" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#mymodal">회원 가입</button>
                                     </div>
                                   </div>
+                                  </form>
                                   </p>
-                                </form>
+                                </div>
                                     <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
+
                               <!-- Modal -->
                                <div class="modal fade" id="mymodal" role="dialog">
                                <div class="modal-dialog">
@@ -98,15 +100,15 @@
                                      <table style="margin:auto">
                                        <tr>
                                          <th><strong>I.D</strong></th>
-                                         <td><input type="text" name="id" class="btn btn-default abt-btn" style="cursor:text" ></p></td>
+                                         <td><input type="text" name="id" class="btn btn-default abt-btn" style="cursor:text" ></td>
                                        </tr>
                                        <tr>
                                          <th><strong>Password</strong></th>
-                                         <td><input type="password" name="password" class="btn btn-default abt-btn" style="cursor:text" ></p></td>
+                                         <td><input type="password" name="password" class="btn btn-default abt-btn" style="cursor:text" ></td>
                                        </tr>
                                        <tr>
                                          <th><strong>Name</strong></th>
-                                         <td><input type="text" name="name" class="btn btn-default abt-btn" style="cursor:text" ></p></td>
+                                         <td><input type="text" name="name" class="btn btn-default abt-btn" style="cursor:text" ></td>
                                        </tr>
                                      </table>
                                      <div style="text-align : center">
@@ -115,7 +117,7 @@
                                    </div>
                                    </div>
                                  </form>
-                                 </p>
+                                </p>
                                </div>
                                <div class="modal-footer">
                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -399,11 +401,6 @@
         })
         // NOTE: note : index.ejs에만 적용.
         // NOTE: 사용자가 좋아했는지를 얻기위해 쿼리문 수정, 수정된 쿼리문에 대한 뷰 수정 해야함.
-
-        // var recentModalList = []; $(document).ready(function () { //Modal on Modal : jquery-1.9.1.js:3257 Uncaught RangeError: Maximum call stack size exceeded.
-        //   $.fn.modal.Constructor.prototype.enforceFocus = function () { }; //모달이 뜰 때 객체를 리스트에 추가 (Add modal to list)
-        //   $('.modal').on('shown.bs.modal', function (e) { recentModalList.push(e.target); }); //모달이 닫힐 때 객체를 리스트에서 삭제. (Remove modal from list)
-        //   $('.modal').on('hide.bs.modal', function (e) { customModalClosed(e); console.log(recentModalList.length); }); });
 
       </script>
   </body>
