@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
   connection.query(first_query, user_info.user_id, function (err, first_results) {
     if(err) {
       console.error('query error : ' + err);
-    } else {console.log(first_results.length);
+    } else {
       var second_query =
       'select boards.NO as NO, Hit, Create_date, boards.ID as ID, Title, \
       Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes, is_like.ID as WhoLike \
@@ -48,10 +48,10 @@ router.get('/', function(req, res, next) {
       connection.query(
         second_query,
         [user_info.user_id, user_info.user_id],
-        function (err, second_results) {console.log(second_results.length);console.log(second_results.Likes);
+        function (err, second_results) {
           if(err) {
             console.error('query error : ' + err);
-          } else {
+          } else {console.log(second_results);console.log(second_results.length);console.log(first_results);console.log(first_results.length);
             res.render('mypage', {
               user : user_info,
               likedPosts : first_results,
