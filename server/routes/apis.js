@@ -95,18 +95,28 @@ router.post('/writePost', function (req, res, next) {
 /* Ajax : 좋아요 */
 router.post('/like', function (req, res, next) {
   var state = req.body.state;
-  var user_id = req.body.user_id;
-  var board_no = req.body.board_no;
-  console.log(state);
-  console.log(user_id);
-  console.log(board_no);
-  /*
-    DB operation..
-    using state..
-    return result..
-  */
-  var result = 'success';
-  res.send({result:result});
+  var value = [req.body.user_id,req.body.board_no];
+
+  var query;
+  if(state=='do') {
+    query = 'insert into is_like SET ID=?, NO=?, Like_date = now()';
+  } else if(state=='undo'){
+    query = 'delete from is_like where ID=? ANd NO=?';
+  } else {
+    res.send({result:'failed'});
+  }
+
+  // NOTE: 쿼리 검증 필요! 비어있는 데 삭제할시 에러 등등..
+  connection.query(query, value, function (err, result) {
+    if(err) {
+      console.log('err: ' + err);
+      res.send({result:'failed'});
+    } else {
+      if(state=='do') console.log('API insertion like: success');
+      else console.log('API deleteion like: success');
+      res.send({result:'success'});
+    }
+  })
 })
 
 module.exports = router;
