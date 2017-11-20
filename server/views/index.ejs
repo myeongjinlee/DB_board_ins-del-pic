@@ -206,19 +206,21 @@
                                     </span>
                                   <ul>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-9" style="text-align:left;">
                                   <% if(boards[i].HashTags==null) { %>
                                     <small>-</small>
                                   <% } else { %>
-                                  <% for(var j=0; j<boards[i].HashTags.length; j++) { %>
                                     <small>
                                       <a href="#" style="color:black">
-                                        <b>
-                                          #<%=boards[i].HashTags[j]%>
-                                        </b>
+                                        <i class="glyphicon glyphicon-tag"> </i>
+                                        <% for(var j=0; j<boards[i].HashTags.length; j++) { %>
+                                          <b>
+                                            #<%=boards[i].HashTags[j]%>
+                                          </b>
+                                        <% } %>
                                       </a>
                                     </small>
-                                  <% }} %>
+                                  <% } %>
                                 </div>
                               </div> <!-- likes and hashtags -->
                             </div>

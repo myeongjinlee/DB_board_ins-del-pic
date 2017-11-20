@@ -145,19 +145,21 @@
                                                 </span>
                                               <ul>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9" style="text-align:left;">
                                               <% if(likedPosts[i].HashTags==null) { %>
                                                 <small>-</small>
                                               <% } else { %>
-                                              <% for(var j=0; j<likedPosts[i].HashTags.length; j++) { %>
                                                 <small>
                                                   <a href="#" style="color:black">
-                                                    <b>
-                                                      #<%=likedPosts[i].HashTags[j]%>
-                                                    </b>
+                                                    <i class="glyphicon glyphicon-tag"> </i>
+                                                    <% for(var j=0; j<likedPosts[i].HashTags.length; j++) { %>
+                                                      <b>
+                                                        #<%=likedPosts[i].HashTags[j]%>
+                                                      </b>
+                                                    <% } %>
                                                   </a>
                                                 </small>
-                                              <% }} %>
+                                              <% } %>
                                             </div>
                                           </div> <!-- likes and hashtags -->
                                         </div>
@@ -213,10 +215,10 @@
                                         <small><b><%=writtenPosts[i].Title%></b></small>
                                         <div class="box-tools pull-right" data-no="<%=writtenPosts[i].NO%>">
                                           <button type="button" name="button1" class="btn btn-box-tool">
-                                            <i class="fa fa-cog"></i>
+                                            <i class="glyphicon glyphicon-edit"></i>
                                           </button>
                                           <button type="button" name="button1" class="btn btn-box-tool">
-                                            <i class="fa fa-times"></i>
+                                            <i class="glyphicon glyphicon-remove"></i>
                                           </button>
                                         </div>
                                       </div>
@@ -253,17 +255,21 @@
                                                 </span>
                                               <ul>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9" style="text-align:left;">
                                               <% if(writtenPosts[i].HashTags==null) { %>
                                                 <small>-</small>
                                               <% } else { %>
-                                              <% for(var j=0; j<writtenPosts[i].HashTags.length; j++) { %>
                                                 <small>
                                                   <a href="#" style="color:black">
-                                                    #<%=writtenPosts[i].HashTags[j]%>
+                                                    <i class="glyphicon glyphicon-tag"> </i>
+                                                    <% for(var j=0; j<writtenPosts[i].HashTags.length; j++) { %>
+                                                      <b>
+                                                        #<%=writtenPosts[i].HashTags[j]%>
+                                                      </b>
+                                                    <% } %>
                                                   </a>
                                                 </small>
-                                              <% }} %>
+                                              <% } %>
                                             </div>
                                           </div> <!-- likes and hashtags -->
                                         </div>
@@ -451,7 +457,7 @@
               'json'
             )
           })
-          $('.fa-times').click(function () {
+          $('.glyphicon-remove').click(function () {
             if(confirm('게시글을 삭제하시겠습니까?')) {
               /* AJAX from client to server. */
               $.post(
