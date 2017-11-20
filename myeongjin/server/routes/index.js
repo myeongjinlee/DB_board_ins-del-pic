@@ -71,17 +71,8 @@ router.get('/list/:page', function(req, res, next) {
   var page = req.params.page;
   var page_num = 4;
   var leng,j=0;
-  var title = [];var imgs = [];var temp = [];
-  // //조회수, 좋아요 수 출력
-  // var query =
-  // connection.query(query, function (err, result) {
-  //   //console.log(result);
-  //   if(err) {
-  //       console.error('query error : ' + err);
-  //   } else {
-  //
-  //   }
-  // });
+  var title = [], imgs = [],contents= [];
+
   //기본 쿼리 문 : 히트순으로 정렬
   var query = 'select * from boards order by hit desc';
   connection.query(query, function (err, result) {
@@ -89,24 +80,33 @@ router.get('/list/:page', function(req, res, next) {
     if(err) {
         console.error('query error : ' + err);
     } else {
-      // 먼저 함수를 정의한다.
+      // 먼저 함수를 정의한다.(callback)
       repeatConsoleLog = function(i, callback) {
             setTimeout(function() {
               var url = result[i].URL;
                 request(url, function(error, response, html)
                 {
                   var $ = cheerio.load(html);
-                  $('title').each(function(){
-                      if($(this).text().length != 0 )
-                        title[i]=$(this).text();
-                  });
-                  $("img").each(function(item,index,array){
-                      if($(this).attr("src").length!=0 && $(this).attr("src").split('http://').length>1){
-                             imgs[j++] = $(this).attr("src");
-                      }
-                      temp[i] = imgs[0];
-                      j=0;
-                  });
+
+                  title[i] = $('meta[property="og:title"]').attr('content');
+                  contents[i] = $('meta[property="og:description"]').attr('content');
+                  imgs[i] = $('meta[property="og:image"]').attr('content');
+
+                  if(title[i]  == null) {
+                        title[i] = $('title').text();
+                  }
+                  if(title[i]  == null) {
+                        title[i] = $('h1').text();
+                  }
+                  if(title[i]  == null) {
+                        title[i] = $('h2').text();
+                  }
+                  if(contents[i] == null) {
+                        contents[i] = $('p').text().substr(0,100);
+                  }
+                  if(imgs[i] == null) {
+                        imgs[i] = $('img').attr('src');
+                  }
                 });
           if (i >= (page*page_num)) {
                     callback();
@@ -119,8 +119,7 @@ router.get('/list/:page', function(req, res, next) {
       repeatConsoleLog((page*page_num)-page_num, function() {
         // 함수의 실행이 모두 끝난 뒤에 이곳에 있는 코드가 실행된다.
               console.log('done');
-              console.log(temp);
-              res.render('index', { boards : result, user : user_info , page : page, leng : Object.keys(result).length-1,page_num : 4, pass : true , title : title , img : temp });
+              res.render('index', { boards : result, user : user_info , page : page, leng : Object.keys(result).length-1,page_num : 4, pass : true , title : title , img : imgs , content : contents });
       });
     }
   });
