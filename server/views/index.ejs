@@ -109,11 +109,13 @@
                               <div class="row">
                                 <div class="col-md-3">
                                   <ul class="bs-glyphicons" data-no="<%=boards[i].NO%>" >
-                                    <li>
-                                      <span class="glyphicon glyphicon-heart"></span>
-                                    </li>
-                                    <i class="fa fa-fw fa-heart-o" style=""></i>
-                                    <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                    <% if(!user || user.user_id!= boards[i].WhoLike) { %>
+                                      <i class="fa fa-fw fa-heart-o" style=""></i>
+                                      <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                    <% } else { %>
+                                      <i class="fa fa-fw fa-heart-o" style="display: none"></i>
+                                      <i class="fa fa-fw fa-heart" style=""></i>
+                                    <% } %>
                                     <span id="likes">
                                     <% if(boards[i].Likes) {%>
                                         <%=boards[i].Likes%>
@@ -316,9 +318,12 @@
             )
           })
         })
+<<<<<<< HEAD
         // NOTE: note : index.ejs에만 적용.
         // NOTE: 사용자가 좋아했는지를 얻기위해 쿼리문 수정, 수정된 쿼리문에 대한 뷰 수정 해야함.
 
+=======
+>>>>>>> 79bf72111ee41a1456671619abc7ac9c3791dd8a
       </script>
   </body>
   </html>
