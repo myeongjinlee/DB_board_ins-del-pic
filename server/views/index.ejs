@@ -226,18 +226,18 @@
                                           <ul>
                                         </div>
                                         <div class="col-md-9" style="text-align:left;">
+                                          <i class="glyphicon glyphicon-tag"> </i>
                                           <% if(boards[i].HashTags==null) { %>
                                             <small>-</small>
                                           <% } else { %>
                                             <small>
-                                              <a href="#" style="color:black">
-                                                <i class="glyphicon glyphicon-tag"> </i>
-                                                <% for(var j=0; j<boards[i].HashTags.length; j++) { %>
+                                              <% for(var j=0; j<boards[i].HashTags.length; j++) { %>
+                                                <a href="/search?keyword=<%=boards[i].HashTags[j]%>" style="color:black">
                                                   <b>
                                                     #<%=boards[i].HashTags[j]%>
                                                   </b>
-                                                <% } %>
-                                              </a>
+                                                </a>
+                                              <% } %>
                                             </small>
                                           <% } %>
                                         </div>

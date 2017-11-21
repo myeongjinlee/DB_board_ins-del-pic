@@ -144,18 +144,18 @@
                                               <ul>
                                             </div>
                                             <div class="col-md-9" style="text-align:left;">
+                                              <i class="glyphicon glyphicon-tag"> </i>
                                               <% if(likedPosts[i].HashTags==null) { %>
                                                 <small>-</small>
                                               <% } else { %>
                                                 <small>
-                                                  <a href="#" style="color:black">
-                                                    <i class="glyphicon glyphicon-tag"> </i>
-                                                    <% for(var j=0; j<likedPosts[i].HashTags.length; j++) { %>
+                                                  <% for(var j=0; j<likedPosts[i].HashTags.length; j++) { %>
+                                                    <a href="/search?keyword=<%=likedPosts[i].HashTags[j]%>" style="color:black">
                                                       <b>
                                                         #<%=likedPosts[i].HashTags[j]%>
                                                       </b>
-                                                    <% } %>
-                                                  </a>
+                                                    </a>
+                                                  <% } %>
                                                 </small>
                                               <% } %>
                                             </div>
@@ -254,18 +254,18 @@
                                               <ul>
                                             </div>
                                             <div class="col-md-9" style="text-align:left;">
+                                              <i class="glyphicon glyphicon-tag"> </i>
                                               <% if(writtenPosts[i].HashTags==null) { %>
                                                 <small>-</small>
                                               <% } else { %>
                                                 <small>
-                                                  <a href="#" style="color:black">
-                                                    <i class="glyphicon glyphicon-tag"> </i>
-                                                    <% for(var j=0; j<writtenPosts[i].HashTags.length; j++) { %>
+                                                  <% for(var j=0; j<writtenPosts[i].HashTags.length; j++) { %>
+                                                    <a href="/search?keyword=<%=writtenPosts[i].HashTags[j]%>" style="color:black">
                                                       <b>
                                                         #<%=writtenPosts[i].HashTags[j]%>
                                                       </b>
-                                                    <% } %>
-                                                  </a>
+                                                    </a>
+                                                  <% } %>
                                                 </small>
                                               <% } %>
                                             </div>
