@@ -96,6 +96,41 @@ router.get('/', function(req, res, next) {
   })
 });
 
+/* 검색 기능(단일) */
+router.get('/search', function (req, res, next) {
+  var user_info;
+  if(req.session.passport===undefined || req.session.passport.user===undefined) {
+    user_info = 0;
+  } else {
+    user_info = req.session.passport.user;
+  }
+
+  var query =
+  'select boards.NO as NO, Hit, Create_date, boards.ID as ID, Title, \
+  Content, URL, MetaTitle, MetaContent, MetaImage, HashTags, Likes, is_like.ID as WhoLike \
+  from (boards left join concat_hashtags on boards.NO=concat_hashtags.NO) \
+  left join total_likes on boards.NO = total_likes.NO \
+  left join is_like on boards.NO = is_like.NO and is_like.ID = ? \
+  where boards.NO in (select NO from hashtags where HashTag = ?)\
+  order by hit desc, boards.NO asc';
+
+  var keywords = req.query.keyword.split(',');
+  keywords.unshift(user_info.user_id);
+
+  console.log(keywords);
+
+  connection.query(query,
+    // user_info==0? '' : user_info.user_id,
+    keywords,
+    function (err, result) {
+    if(err) {
+        console.error('query error : ' + err);
+    } else {
+      res.render('index', { boards : result, user : user_info });
+    }
+  })
+})
+
 // /* 회원 가입 */
 // router.get('/createAccount', function (req, res, next) {
 //   res.render('createAccount');
