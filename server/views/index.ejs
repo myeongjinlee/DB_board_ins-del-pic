@@ -160,74 +160,90 @@
                 <!-- <div class="heading-separator"></div> -->
                 <div class="heading-details">
                   <div class="row">
-                    <% for(var i=0; i<boards.length; i++) {
-                      var date = boards[i].Create_date;
-                      var formattedDate = (date.getFullYear())+'/'+
-                                          (date.getMonth()+1)+'/'+
-                                          (date.getDate());
-                      if(boards[i].HashTags)
-                        boards[i].HashTags = boards[i].HashTags.split(',');
-                    %>
-                      <div class="col-md-6">
-                        <div class="box">
-                          <div class="box-header with-border">
-                            <small><b><%=boards[i].Title%></b></small>
-                          </div>
-                          <div class="box-body">
-                            <small class="pull-right"><%=boards[i].ID%>, <%=formattedDate%></small><br>
-                            <%=boards[i].Content%>
-                            <hr>
-                            <div class="col-md-4">
-                              <a href='<%=boards[i].URL%>'><img src='<%=boards[i].MetaImage%>' alt="준비중" ></a>
-                            </div>
-                            <div class="col-md-8">
-                              <b>
-                                <%=boards[i].MetaTitle%>
-                              </b>
-                              <br>
-                              <%=boards[i].MetaContent%>
-                              <hr>
-                              <div class="row">
-                                <div class="col-md-3">
-                                  <ul class="bs-glyphicons" data-no="<%=boards[i].NO%>" >
-                                    <% if(!user || user.user_id!= boards[i].WhoLike) { %>
-                                      <i class="fa fa-fw fa-heart-o" style=""></i>
-                                      <i class="fa fa-fw fa-heart" style="display: none;"></i>
-                                    <% } else { %>
-                                      <i class="fa fa-fw fa-heart-o" style="display: none"></i>
-                                      <i class="fa fa-fw fa-heart" style=""></i>
-                                    <% } %>
-                                    <span id="likes">
-                                    <% if(boards[i].Likes) {%>
-                                        <%=boards[i].Likes%>
-                                    <% } else { %>
-                                        0
-                                    <% } %>
-                                    </span>
-                                  <ul>
-                                </div>
-                                <div class="col-md-9" style="text-align:left;">
-                                  <% if(boards[i].HashTags==null) { %>
-                                    <small>-</small>
-                                  <% } else { %>
-                                    <small>
-                                      <a href="#" style="color:black">
-                                        <i class="glyphicon glyphicon-tag"> </i>
-                                        <% for(var j=0; j<boards[i].HashTags.length; j++) { %>
-                                          <b>
-                                            #<%=boards[i].HashTags[j]%>
-                                          </b>
-                                        <% } %>
-                                      </a>
-                                    </small>
-                                  <% } %>
-                                </div>
-                              </div> <!-- likes and hashtags -->
-                            </div>
-                          </div>
-                        </div>
+                    <div class="col-md-12">
+                      <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a href="#tab_1" data-toggle="tab">카드 보기</a></li>
+                          <li><a href="#tab_2" data-toggle="tab">카테고리 보기</a></li>
+                        </ul> <!-- nav tabs -->
                       </div>
-                    <% } %>
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                          <div class="row">
+                            <% for(var i=0; i<boards.length; i++) {
+                              var date = boards[i].Create_date;
+                              var formattedDate = (date.getFullYear())+'/'+
+                                                  (date.getMonth()+1)+'/'+
+                                                  (date.getDate());
+                              if(boards[i].HashTags)
+                                boards[i].HashTags = boards[i].HashTags.split(',');
+                            %>
+                              <div class="col-md-6">
+                                <div class="box">
+                                  <div class="box-header with-border">
+                                    <small><b><%=boards[i].Title%></b></small>
+                                  </div>
+                                  <div class="box-body">
+                                    <small class="pull-right"><%=boards[i].ID%>, <%=formattedDate%></small><br>
+                                    <%=boards[i].Content%>
+                                    <hr>
+                                    <div class="col-md-4">
+                                      <a href='<%=boards[i].URL%>'><img src='<%=boards[i].MetaImage%>' alt="준비중" ></a>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <b>
+                                        <%=boards[i].MetaTitle%>
+                                      </b>
+                                      <br>
+                                      <%=boards[i].MetaContent%>
+                                      <hr>
+                                      <div class="row">
+                                        <div class="col-md-3">
+                                          <ul class="bs-glyphicons" data-no="<%=boards[i].NO%>" >
+                                            <% if(!user || user.user_id!= boards[i].WhoLike) { %>
+                                              <i class="fa fa-fw fa-heart-o" style=""></i>
+                                              <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                            <% } else { %>
+                                              <i class="fa fa-fw fa-heart-o" style="display: none"></i>
+                                              <i class="fa fa-fw fa-heart" style=""></i>
+                                            <% } %>
+                                            <span id="likes">
+                                            <% if(boards[i].Likes) {%>
+                                                <%=boards[i].Likes%>
+                                            <% } else { %>
+                                                0
+                                            <% } %>
+                                            </span>
+                                          <ul>
+                                        </div>
+                                        <div class="col-md-9" style="text-align:left;">
+                                          <% if(boards[i].HashTags==null) { %>
+                                            <small>-</small>
+                                          <% } else { %>
+                                            <small>
+                                              <a href="#" style="color:black">
+                                                <i class="glyphicon glyphicon-tag"> </i>
+                                                <% for(var j=0; j<boards[i].HashTags.length; j++) { %>
+                                                  <b>
+                                                    #<%=boards[i].HashTags[j]%>
+                                                  </b>
+                                                <% } %>
+                                              </a>
+                                            </small>
+                                          <% } %>
+                                        </div>
+                                      </div> <!-- likes and hashtags -->
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <% } %>
+                          </div>
+                        </div> <!-- tab_1 : 카드 보기 -->
+                        <div class="tab-pane" id="tab_2">
+                        </div> <!-- tab_2 : 카테고리 보기 -->
+                      </div>
+                    </div>
                   </div>
                 </div>
         </div>
