@@ -109,6 +109,7 @@
                                                       (date.getDate());
                                   if(likedPosts[i].HashTags)
                                     likedPosts[i].HashTags = likedPosts[i].HashTags.split(',');
+                                    var k=1;
                                 %>
                                   <div class="col-md-4">
                                     <div class="box">
@@ -121,7 +122,7 @@
                                         <hr>
                                         <div class="col-md-4">
                                           <a href='<%=likedPosts[i].URL%>'><img src='<%=likedPosts[i].MetaImage%>' alt="준비중" ></a>
-                                        </div>
+                                        </div><%k++;%>
                                         <div class="col-md-8">
                                           <b>
                                             <%=likedPosts[i].MetaTitle%>

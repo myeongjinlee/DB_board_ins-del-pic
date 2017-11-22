@@ -186,6 +186,7 @@
                                                   (date.getDate());
                               if(boards[i].HashTags)
                                 boards[i].HashTags = boards[i].HashTags.split(',');
+                                var k=1;
                             %>
                               <div class="col-md-6">
                                 <div class="box">
@@ -199,6 +200,7 @@
                                     <div class="col-md-4">
                                       <a href='<%=boards[i].URL%>'><img src='<%=boards[i].MetaImage%>' alt="준비중" ></a>
                                     </div>
+                                    <%k++;%>
                                     <div class="col-md-8">
                                       <b>
                                         <%=boards[i].MetaTitle%>

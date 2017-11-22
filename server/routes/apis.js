@@ -20,7 +20,7 @@ router.post('/createAccount', function(req, res, next) {
   connection.query(query, value, function (err, result) {
     if(err) {
       console.log('err :' + err);
-      res.send('<script>alert("아이디가 존재합니다.");location.href="/createAccount";</script>');
+      res.send('<script>alert("아이디가 존재합니다.");location.href="/";</script>');
     } else {
       res.send('<script>alert("회원가입이 완료되었습니다.");location.href="/";</script>');
     }
