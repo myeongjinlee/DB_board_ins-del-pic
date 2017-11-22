@@ -84,8 +84,6 @@
                           <li class="active"><a href="#tab_1" data-toggle="tab">좋아요한 글보기</a></li>
                           <li><a href="#tab_2" data-toggle="tab">등록한 글보기</a></li>
                           <li><a href="#tab_3" data-toggle="tab">카테고리 보기</a></li>
-
-                          <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                         </ul>
                         <div class="tab-content">
                           <div class="tab-pane active" id="tab_1">
@@ -146,18 +144,18 @@
                                               <ul>
                                             </div>
                                             <div class="col-md-9" style="text-align:left;">
+                                              <i class="glyphicon glyphicon-tag"> </i>
                                               <% if(likedPosts[i].HashTags==null) { %>
                                                 <small>-</small>
                                               <% } else { %>
                                                 <small>
-                                                  <a href="#" style="color:black">
-                                                    <i class="glyphicon glyphicon-tag"> </i>
-                                                    <% for(var j=0; j<likedPosts[i].HashTags.length; j++) { %>
+                                                  <% for(var j=0; j<likedPosts[i].HashTags.length; j++) { %>
+                                                    <a href="/search?keyword=<%=likedPosts[i].HashTags[j]%>" style="color:black">
                                                       <b>
                                                         #<%=likedPosts[i].HashTags[j]%>
                                                       </b>
-                                                    <% } %>
-                                                  </a>
+                                                    </a>
+                                                  <% } %>
                                                 </small>
                                               <% } %>
                                             </div>
@@ -322,18 +320,18 @@
                                               <ul>
                                             </div>
                                             <div class="col-md-9" style="text-align:left;">
+                                              <i class="glyphicon glyphicon-tag"> </i>
                                               <% if(writtenPosts[i].HashTags==null) { %>
                                                 <small>-</small>
                                               <% } else { %>
                                                 <small>
-                                                  <a href="#" style="color:black">
-                                                    <i class="glyphicon glyphicon-tag"> </i>
-                                                    <% for(var j=0; j<writtenPosts[i].HashTags.length; j++) { %>
+                                                  <% for(var j=0; j<writtenPosts[i].HashTags.length; j++) { %>
+                                                    <a href="/search?keyword=<%=writtenPosts[i].HashTags[j]%>" style="color:black">
                                                       <b>
                                                         #<%=writtenPosts[i].HashTags[j]%>
                                                       </b>
-                                                    <% } %>
-                                                  </a>
+                                                    </a>
+                                                  <% } %>
                                                 </small>
                                               <% } %>
                                             </div>
