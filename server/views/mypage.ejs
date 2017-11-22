@@ -208,15 +208,81 @@
                                                         (date.getDate());
                                     if(writtenPosts[i].HashTags)
                                       writtenPosts[i].HashTags = writtenPosts[i].HashTags.split(',');
+                                      var bhashtag,bcontent,burl,btitle;
                                   %>
                                   <div class="col-md-4">
                                     <div class="box">
                                       <div class="box-header with-border">
-                                        <small><b><%=writtenPosts[i].Title%></b></small>
-                                        <div class="box-tools pull-right" data-no="<%=writtenPosts[i].NO%>">
-                                          <button type="button" name="button1" class="btn btn-box-tool">
-                                            <i class="glyphicon glyphicon-edit"></i>
-                                          </button>
+                                        <small id="boardTitle"><b><%=writtenPosts[i].Title%></b></small>
+                                        <div class="box-tools pull-right" data-no="<%=writtenPosts[i].NO%>" data="<%=writtenPosts[i]%>">
+                                          <button type="button" name="button1" class="btn btn-box-tool" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#editmodal" >
+                                              <i class="glyphicon glyphicon-edit"></i></button>
+                                              <!-- Modal -->
+                                               <div class="modal fade" id="editmodal" role="dialog">
+                                               <div class="modal-dialog">
+                                               <!-- Modal content-->
+                                               <div class="modal-content">
+                                               <div class="modal-header">
+                                               <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                               <h4 class="modal-title">게시물 수정</h4>
+                                               </div>
+                                               <div class="modal-body">
+                                              <p>
+                                                <form action="/apis/editPost" method="post" class="form-horizontal">
+                                                  <div class="box-body">
+                                                    <div class="form-group">
+                                                      <label for="Title" class="col-sm-2 control-label">Title</label>
+                                                      <div class="col-sm-10">
+                                                        <input type="text" style="display:none" id="boardno" name="boardno" value>
+                                                        <input type="text" class="form-control" id="editTitle" name="Title" value>
+                                                      </div>
+                                                      <div class="com-sm-offset-2 col-sm-10">
+                                                        <div class="checkbox">
+                                                          <label>
+                                                            <input type="checkbox" id="crawlingTitle" checked="checked">URL 제목과 동일
+                                                          </label>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="URL" class="col-sm-2 control-label">URL</label>
+
+                                                      <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="editURL" name="URL" value>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="Content" class="col-sm-2 control-label">Content</label>
+
+                                                      <div class="col-sm-10">
+                                                        <textarea class="form-control" rows="3"  id="editContent" name="Content" placeholder="Write your insight."></textarea>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="HashTags" class="col-sm-2 control-label">HashTags</label>
+
+                                                      <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="editHashTags" name="HashTags" value>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <!-- /.box-body -->
+                                                  <div class="box-footer">
+                                                    <table style="margin:auto">
+                                                      <tr>
+                                                        <td><button type="submit" class="btn btn-default pull-right">수정</button></td>
+                                                        <td><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></td>
+                                                      </tr>
+                                                    </table>
+                                                  </div>
+                                                  <!-- /.box-footer -->
+                                                </form>
+                                              </p>
+                                               </div>
+                                               </div>
+                                               </div>
+                                              </div>
+
                                           <button type="button" name="button1" class="btn btn-box-tool">
                                             <i class="glyphicon glyphicon-remove"></i>
                                           </button>
@@ -294,7 +360,6 @@
                   </div>
                 </div>
         </div>
-
         <!--Footer-->
         <footer id="footer" class="sections footer different-bg">
         <div class="container">
@@ -477,6 +542,31 @@
               )
             }
           })
+          $('.glyphicon-edit').click(function () {
+              /* AJAX from client to server. */
+              $.post(
+                '/apis/updatePost',
+                {
+                  user_id : '<%=user.user_id%>',
+                  board_no : $(this).parent().parent().attr("data-no")
+                },
+                function (data) {
+                  boardno = data.result.NO;
+                  btitle  = data.result.Title;
+                  burl = data.result.URL;
+                  bcontent = data.result.Content;
+                  bhashtag = data.result.HashTags;
+
+                  $('#boardno').attr('value',boardno);
+                  $('#editTitle').attr('value',btitle);
+                  $('#editURL').attr('value',burl);
+                  $('#editContent').text(bcontent);
+                  $('#editHashTags').attr('value',bhashtag);
+                },
+                'json'
+              )
+          })
+
         })
       </script>
   </body>

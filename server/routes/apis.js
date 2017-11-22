@@ -70,6 +70,7 @@ router.post('/writePost', function (req, res, next) {
     }
 
     var HashTags = req.body.HashTags;
+    HashTags = HashTags.split(' ').join(''); //공백제거
     HashTags = HashTags.split(',');
 
     var first_query = 'insert into BOARDS SET NO = NULL, Hit = 0, Create_date = now(), ?';
@@ -84,7 +85,6 @@ router.post('/writePost', function (req, res, next) {
           second_query += '(' + NO + ',' + '"' + HashTags[i] + '"' + ')';
           if(i!=HashTags.length-1) second_query +=',';
         } second_query += ';';
-
         connection.query(second_query,function (err, result) {
           if(err) {
             console.log('err :' + err);
@@ -115,6 +115,62 @@ router.post('/deletePost', function (req, res, next) {
     }
   })
 })
+/* 게시글 수정, Ajax */
+router.post('/updatePost', function (req, res, next) {
+  var value = req.body.board_no;
+  console.log(value);
+  var query = 'select b.NO,Title,URL,Content,HashTags from boards b,concat_hashtags c where b.NO = c.NO and b.NO= ?';
+  connection.query(query, value, function (err, result) {
+    if(err) {
+      console.log('err :' + err);
+    } else {
+      console.log(result[0]);
+      res.json({result : result[0]});
+    }
+  });
+});
+
+
+router.post('/editPost', function (req, res, next) {
+  var board_no = req.body.boardno;
+  var value = [req.body.Title,req.body.URL,req.body.Content,req.body.boardno];
+  var query = 'update boards set boards.Title=?,boards.URL=?,boards.Content=? where NO=?';
+  connection.query(query, value, function (err, result) {
+    if(err) {
+      console.log('err :' + err);
+      res.send('<script>alert("수정 중 에러가 발생하였습니다.");location.href="/account/";</script>');
+    } else {
+      var second_query = 'delete from hashtags where hashtags.NO = ?';
+      connection.query(second_query,board_no,function (err, result) {
+      if(err) {
+          console.log('err :' + err);
+          res.send('<script>alert("수정 중 에러가 발생하였습니다.");location.href="/account/";</script>');
+      } else {
+          var NO = req.body.boardno;
+          var HashTags = req.body.HashTags;
+          HashTags = HashTags.split(' ').join(''); //공백제거
+          HashTags = HashTags.split(',');
+
+          var third_query = 'insert into HASHTAGS(NO,HashTag) VALUES';
+          for(var i=0; i<HashTags.length; i++) {
+              third_query += '(' + NO + ',' + '"' + HashTags[i] + '"' + ')';
+              if(i!=HashTags.length-1) third_query +=',';
+          } third_query += ';';
+          connection.query(third_query,function (err, result) {
+          if(err) {
+              console.log('err :' + err);
+              res.send('<script>alert("수정 중 에러가 발생하였습니다.");location.href="/account/";</script>');
+          } else {
+              console.log('게시글 수정이 완료되었습니다.');
+              res.send('<script>alert("게시글 수정이 완료되었습니다.");location.href="/account/";</script>');
+          }
+          })
+        }
+      })
+    }
+  });
+});
+
 
 /* Ajax : 좋아요 */
 router.post('/like', function (req, res, next) {
