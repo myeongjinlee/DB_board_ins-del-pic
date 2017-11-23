@@ -49,8 +49,16 @@ router.post('/writePost', function (req, res, next) {
       content = $('p').text().substr(0,100);
     }
     if(image == null) {
-      image = $('img').attr('src');
+        image = $('img').attr('src');
     }
+
+    /*이미지 없을시 대체 이미지, 마지막에 수업때 나눠준 서버 연결할때 구현!!!!!*/
+    // var confirm_image = image;
+    // confirm_image = confirm_image.split('/');
+    // if(confirm_image[0].length == 0){
+    //   image = 0;
+    //   image = '/assets/images/9.jpg';
+    // }
 
     var user_title;
     if(req.body.Title) {

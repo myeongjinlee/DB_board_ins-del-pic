@@ -60,11 +60,14 @@
                     <div class="row">
                         <div class="col-md-12" >
                             <div class="home-content">
-                                <h5>MY PAGE</h5>
-                                사용자 ID : <%=user.user_id%> <br>
-                                사용자 이름 : <%=user.nickname%><br>
-                                게시글 등록 수 : <%=writtenPosts.length%><br>
-                                좋아요 누른 수 : <%=likedPosts.length%><br>
+                                <h3>MY BOARD PAGE</h3>
+                                <hr>
+                                <table style="font-size: 1.5rem ">
+                                  <tr><td><span style="color:green">ID</td></span><td>&nbsp;&nbsp;<%=user.user_id%> </td></tr>
+                                  <tr><td><span style="color:green">Name</td></span><td>&nbsp;&nbsp;<%=user.nickname%></td></tr>
+                                  <tr><td><span style="color:green">Posted</td></span><td>&nbsp;&nbsp;<%=writtenPosts.length%></td></tr>
+                                  <tr><td><span style="color:green">Liked</td></span><td>&nbsp;&nbsp;<%=likedPosts.length%></td></tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -83,7 +86,7 @@
                         <ul class="nav nav-tabs">
                           <li class="active"><a href="#tab_1" data-toggle="tab">좋아요한 글보기</a></li>
                           <li><a href="#tab_2" data-toggle="tab">등록한 글보기</a></li>
-                          <li><a href="#tab_3" data-toggle="tab">카테고리 보기</a></li>
+                          <!-- <li><a href="#tab_3" data-toggle="tab">카테고리 보기</a></li> -->
                         </ul>
                         <div class="tab-content">
                           <div class="tab-pane active" id="tab_1">
@@ -109,7 +112,6 @@
                                                       (date.getDate());
                                   if(likedPosts[i].HashTags)
                                     likedPosts[i].HashTags = likedPosts[i].HashTags.split(',');
-                                    var k=1;
                                 %>
                                   <div class="col-md-4">
                                     <div class="box">
@@ -122,7 +124,7 @@
                                         <hr>
                                         <div class="col-md-4">
                                           <a href='<%=likedPosts[i].URL%>'><img src='<%=likedPosts[i].MetaImage%>' alt="준비중" ></a>
-                                        </div><%k++;%>
+                                        </div>
                                         <div class="col-md-8">
                                           <b>
                                             <%=likedPosts[i].MetaTitle%>
