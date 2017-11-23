@@ -150,21 +150,22 @@
             </div>
         </header>
 
-        <section id="Login" class="sections">
         <div class="heading-content text-center">
-        <div class="heading-title">
-        <form method="get" action="/search">
-            <div class="row"  >
-                <div class="col-md-9 col-md-offset-3 col-sm-6  col-xs-6 col-xs-offset-3" style="margin-left:450dp;align : center; margin-top:50dp;">
+          <div class="heading-title">
+            <form method="get" action="/search">
+              <div class="row"  >
+                  <div class="col-md-6 col-md-offset-3 col-sm-6  col-xs-6 col-xs-offset-3" style="margin-left:450dp;align : center; margin-top:50dp;">
                       <input type="text" class="btn btn-default abt-btn" style="width:63%; cursor:text" name="keyword">
                       <button type="submit" class="btn btn-default abt-btn">SEARCH</button>
-                </div>
-            </div>
-        </form>
+                  </div>
+              </div>
+          </form>
         <!-- <div class="separator"></div> -->
+          </div>
         </div>
+
         <!-- <div class="heading-separator"></div> -->
-        <div class="heading-details">
+        <div class="heading-details text-center">
           <div class="row">
             <div class="col-md-12">
               <div class="nav-tabs-custom">
@@ -174,160 +175,119 @@
                   </ul> <!-- nav tabs -->
               </div>
             <div class="tab-content">
-            <div class="tab-pane active" id="tab_1">
+              <div class="tab-pane active" id="tab_1">
+                <div class="row">
+                <% for(var i=0; i<boards.length; i++) {
+                  var date = boards[i].Create_date;
+                  var formattedDate = (date.getFullYear())+'/'+
+                                      (date.getMonth()+1)+'/'+
+                                      (date.getDate());
+                  if(boards[i].HashTags)
+                      boards[i].HashTags = boards[i].HashTags.split(',');
+                %>
+                  <div class="col-md-6">
+                    <div class="box">
+                      <div class="box-header with-border">
+                        <small><b><%=boards[i].Title%></b></small>
+                      </div>
+                      <div class="box-body">
+                        <small class="pull-right"><%=boards[i].ID%>, <%=formattedDate%></small><br>
+                        <%=boards[i].Content%>
+                        <hr>
+                        <div class="col-md-4">
+                          <a href='<%=boards[i].URL%>'><img src='<%=boards[i].MetaImage%>' alt="준비중" ></a>
+                        </div>
+                        <div class="col-md-8">
+                          <b><%=boards[i].MetaTitle%></b><br>
+                          <%=boards[i].MetaContent%>
+                          <hr>
                           <div class="row">
-                            <% for(var i=0; i<boards.length; i++) {
-                              var date = boards[i].Create_date;
-                              var formattedDate = (date.getFullYear())+'/'+
-                                                  (date.getMonth()+1)+'/'+
-                                                  (date.getDate());
-                              if(boards[i].HashTags)
-                                boards[i].HashTags = boards[i].HashTags.split(',');
-                                var k=1;
-                            %>
-                              <div class="col-md-6">
-                                <div class="box">
-                                  <div class="box-header with-border">
-                                    <small><b><%=boards[i].Title%></b></small>
-                                  </div>
-                                  <div class="box-body">
-                                    <small class="pull-right"><%=boards[i].ID%>, <%=formattedDate%></small><br>
-                                    <%=boards[i].Content%>
-                                    <hr>
-                                    <div class="col-md-4">
-                                      <a href='<%=boards[i].URL%>'><img src='<%=boards[i].MetaImage%>' alt="준비중" ></a>
-                                    </div>
-                                    <div class="col-md-8">
-                                      <b>
-                                        <%=boards[i].MetaTitle%>
-                                      </b>
-                                      <br>
-                                      <%=boards[i].MetaContent%>
-                                      <hr>
-                                      <div class="row">
-                                        <div class="col-md-3">
-                                          <ul class="bs-glyphicons" data-no="<%=boards[i].NO%>" >
-                                            <% if(!user || user.user_id!= boards[i].WhoLike) { %>
-                                              <i class="fa fa-fw fa-heart-o" style=""></i>
-                                              <i class="fa fa-fw fa-heart" style="display: none;"></i>
-                                            <% } else { %>
-                                              <i class="fa fa-fw fa-heart-o" style="display: none"></i>
-                                              <i class="fa fa-fw fa-heart" style=""></i>
-                                            <% } %>
-                                            <span id="likes">
-                                            <% if(boards[i].Likes) {%>
-                                                <%=boards[i].Likes%>
-                                            <% } else { %>
-                                                0
-                                            <% } %>
-                                            </span>
-                                          <ul>
-                                        </div>
-                                        <div class="col-md-9" style="text-align:left;">
-                                          <i class="glyphicon glyphicon-tag"> </i>
-                                          <% if(boards[i].HashTags==null) { %>
-                                            <small>-</small>
-                                          <% } else { %>
-                                            <small>
-                                              <% for(var j=0; j<boards[i].HashTags.length; j++) { %>
-                                                <a href="/search?keyword=<%=boards[i].HashTags[j]%>" style="color:black">
-                                                  <b>
-                                                    #<%=boards[i].HashTags[j]%>
-                                                  </b>
-                                                </a>
-                                              <% } %>
-                                            </small>
-                                          <% } %>
-                                        </div>
-                                      </div> <!-- likes and hashtags -->
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            <% } %>
-                          </div>
-                        </div> <!-- tab_1 : 카드 보기 -->
-                        <div class="tab-pane" id="tab_2">
-                        </div> <!-- tab_2 : 카테고리 보기 -->
+                            <div class="col-md-3">
+                                <ul class="bs-glyphicons" data-no="<%=boards[i].NO%>" >
+                                <% if(!user || user.user_id!= boards[i].WhoLike) { %>
+                                    <i class="fa fa-fw fa-heart-o" style=""></i>
+                                    <i class="fa fa-fw fa-heart" style="display: none;"></i>
+                                <% } else { %>
+                                    <i class="fa fa-fw fa-heart-o" style="display: none"></i>
+                                    <i class="fa fa-fw fa-heart" style=""></i>
+                                <% } %>
+                                  <span id="likes">
+                                <% if(boards[i].Likes) {%>
+                                  <%=boards[i].Likes%>
+                                <% } else { %>
+                                0
+                                <% } %>
+                                  </span>
+                                <ul>
+                            </div>
+                            <div class="col-md-9" style="text-align:left;">
+                                <i class="glyphicon glyphicon-tag"> </i>
+                                  <% if(boards[i].HashTags==null) { %>
+                                  <small>-</small>
+                                  <% } else { %>
+                                  <small>
+                                  <% for(var j=0; j<boards[i].HashTags.length; j++) { %>
+                                  <a href="/search?keyword=<%=boards[i].HashTags[j]%>" style="color:black">
+                                  <b>#<%=boards[i].HashTags[j]%></b></a>
+                                  <% } %>
+                                  </small>
+                                  <% } %>
+                            </div>
+                          </div> <!-- likes and hashtags -->
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                  <% } %>
+               </div>
+            </div> <!-- tab_1 : 카드 보기 -->
+                        <!-- <div class="tab-pane" id="tab_2">
+                        </div> tab_2 : 카테고리 보기 -->
+          </div>
         </div>
+      </div>
+    </div>
 
-        <!--Footer-->
-        <footer id="footer" class="sections footer different-bg">
-        <div class="container">
-          <div class="row">
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                  <div class="footer-first-content">
-                      <div class="logo"><img src="assets/images/footer-logo.png" alt="Company Logo" /></div>
-                      <p>개발자들이 연구 및 개발을 진행하면서 수 많은 문서 및 소스 코드 등을 참고하고, 환경 설정 및 트러블 슈팅이 잘 된 게시글들을 참조하곤 한다. </p>
-                      <p>시간이 오래 지난 후 방대한 양의 data에서 이전에 참조하였던 블로그나 문서들을 다시 찾는 시간이 오래 걸린다는 문제를 해결하고자 해당 작업을 진행할 때 참조하거나 고민했었던
-                        이슈 들을 기록하고 공유함으로써 여러 사람에게 생산성을 높이고자 해당 웹 애플리케이션을 개발하게 되었다</p>
-                  </div>
+
+    <!--Footer-->
+    <footer id="footer" class="sections footer different-bg">
+    <div class="container">
+      <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="footer-first-content">
+                  <div class="logo"><img src="/assets/images/footer-logo.png" alt="Company Logo" /></div>
+                  <p>개발자들이 연구 및 개발을 진행하면서 수 많은 문서 및 소스 코드 등을 참고하고, 환경 설정 및 트러블 슈팅이 잘 된 게시글들을 참조하곤 한다. </p>
+                  <p>시간이 오래 지난 후 방대한 양의 data에서 이전에 참조하였던 블로그나 문서들을 다시 찾는 시간이 오래 걸린다는 문제를 해결하고자 해당 작업을 진행할 때 참조하거나 고민했었던
+                    이슈 들을 기록하고 공유함으로써 여러 사람에게 생산성을 높이고자 해당 웹 애플리케이션을 개발하게 되었다</p>
               </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                  <div class="footer-mid-content">
-                      <h4>Recent Posts</h4>
-                      <div class="post">
-            <div class="post-item">
-              <h6>March 30, 2014</h6>
-              <a href="#">Duis autem vel eum iriure dolor</a>
-            </div>
-                      </div>
-                      <div class="post">
-            <div class="post-item">
-              <h6>March 30, 2014</h6>
-              <a href="#">Duis autem vel eum iriure dolor</a>
-            </div>
-                      </div>
-                      <div class="post">
-            <div class="post-item">
-              <h6>March 30, 2014</h6>
-              <a href="#">Duis autem vel eum iriure dolor</a>
-            </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                  <div class="footer-mid-content">
-                      <h4>Twitter Feeds</h4>
-                      <div class="post">
-            <div class="post-item">
-              <h6>March 30, 2014</h6>
-              <a href="#">Good work buddy</a>
-            </div>
-                      </div>
-                      <div class="post">
-            <div class="post-item">
-              <h6>March 30, 2014</h6>
-              <a href="#">Good work buddy</a>
-            </div>
-                      </div>
-                      <div class="post">
-            <div class="post-item">
-              <h6>March 30, 2014</h6>
-              <a href="#">Good work buddy</a>
-            </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                  <div class="footer-last-content">
-                      <h4>Our Address</h4>
-                      <p>광운대학교 컴퓨터공학과 </p>
-                      <p>이명진</p>
-                      <div class="contact-info">
-                          <p><i class="fa fa-map-marker"></i>Moonshine St. 14/05 Light</p>
-                          <p><i class="fa fa-phone"></i>+00 (123) 456 78 90</p>
-                          <p><i class="fa fa-envelope"></i>first.last@email.com</p>
-                      </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="footer-last-content">
+                  <h4>MYEONGJIN LEE</h4>
+                  <p>Computer engineering - 
+                  Kwangwoon University</p>
+                  <div class="contact-info">
+                      <p><i class="fa fa-map-marker"></i>Kwangwoon-ro 15 </p>
+                      <p><i class="fa fa-phone"></i>010-1234-3321</p>
+                      <p><i class="fa fa-envelope"></i>first.last@email.com</p>
                   </div>
               </div>
           </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="footer-last-content">
+                  <h4>DOYEON LEE</h4>
+                  <p>Computer engineering -
+                  Kwangwoon University</p>
+                  <div class="contact-info">
+                      <p><i class="fa fa-map-marker"></i>Kwangwoon-ro 15 </p>
+                      <p><i class="fa fa-phone"></i>010-1234-3321</p>
+                      <p><i class="fa fa-envelope"></i>first.last@email.com</p>
+                  </div>
+              </div>
           </div>
-        </footer>
+      </div>
+      </div>
+    </footer>
 
       <div class="scroll-top">
         <div class="scrollup">
