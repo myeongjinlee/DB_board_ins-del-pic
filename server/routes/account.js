@@ -51,7 +51,7 @@ router.get('/', function(req, res, next) {
         function (err, second_results) {
           if(err) {
             console.error('query error : ' + err);
-          } else {console.log(second_results);console.log(second_results.length);console.log(first_results);console.log(first_results.length);
+          } else {//console.log(second_results);console.log(second_results.length);console.log(first_results);console.log(first_results.length);
             res.render('mypage', {
               user : user_info,
               likedPosts : first_results,
